@@ -1,11 +1,11 @@
-import { Octicons } from "@expo/vector-icons";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-
+import { useAppSelector } from "@/redux/hooks/useApp";
+import Config from "@/screens/Config";
 import Home from "@/screens/Home";
+import Login from "@/screens/Login";
+import { AntDesign, Octicons } from "@expo/vector-icons";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import Login from "@/screens/Login";
-import { useAppSelector } from "@/redux/hooks/useApp";
 
 export type RootStackParams = {
   bottomBar: any;
@@ -40,6 +40,15 @@ const TabRoutes = () => {
         options={{
           tabBarIcon: ({ color }) => (
             <Octicons name="home" color={color} size={24} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="config"
+        component={Config}
+        options={{
+          tabBarIcon: ({ color }) => (
+            <AntDesign name="setting" size={24} color={color} />
           ),
         }}
       />
