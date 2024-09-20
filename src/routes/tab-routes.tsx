@@ -23,7 +23,7 @@ const TabRoutes = () => {
     <Tab.Navigator
       screenOptions={{
         headerShown: false,
-        tabBarActiveTintColor: "#0ea5e9",
+        tabBarActiveTintColor: "#0066d2",
         tabBarShowLabel: false,
         tabBarStyle: {
           height: 60,

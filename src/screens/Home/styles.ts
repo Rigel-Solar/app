@@ -1,38 +1,45 @@
 import styled from "styled-components/native";
 
 export const Container = styled.ScrollView`
-  flex: 1;
-  padding: 50px 30px;
-`
+	flex: 1;
+	padding: 60px 30px;
+	background-color: ${({ theme }) => theme.colors.brand.background};
+`;
 
 export const Header = styled.View`
-  flex-direction: row;
-  align-items: center;
-  justify-content: flex-end;
-`
+	flex: 1;
+`;
 
-export const Main = styled.View`
-  flex: 1;
-`
+export const Main = styled.ScrollView`
+	flex: 1;
+	padding: 24px 0 80px 0;
+`;
 
-export const TitleArea = styled.Text`
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-`
+export const TitleArea = styled.View`
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+`;
 
 export const Title = styled.Text`
-  font-size: 24px;
-`
+	font-family: ${({ theme }) => theme.font.family.medium};
+	font-size: ${({ theme }) => theme.font.size.heading.lg}px;
+`;
+
+export const Description = styled.Text`
+	font-family: ${({ theme }) => theme.font.family.regular};
+	font-size: ${({ theme }) => theme.font.size.body.md}px;
+	color: ${({ theme }) => theme.colors.grayscale.gray_80};
+`;
 
 export const Button = styled.TouchableOpacity`
-  background-color: #0ea5e9;
-  padding: 12px;
-  border-radius: 6px;
+	background-color: #0ea5e9;
+	padding: 12px;
+	border-radius: 6px;
 `;
 
 export const ButtonText = styled.Text`
-  font-family: Poppins_600SemiBold;
-  color: #fff;
-  text-align: center;
+	font-family: Poppins_600SemiBold;
+	color: #fff;
+	text-align: center;
 `;
