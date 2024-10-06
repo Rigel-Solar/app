@@ -2,7 +2,7 @@ import styled from "styled-components/native";
 
 export const Container = styled.ScrollView`
 	flex: 1;
-	padding: 60px 30px;
+	padding: 70px 30px;
 	background-color: ${({ theme }) => theme.colors.brand.background};
 `;
 
@@ -39,7 +39,7 @@ export const Button = styled.TouchableOpacity`
 `;
 
 export const ButtonText = styled.Text`
-	font-family: Poppins_600SemiBold;
+	font-family: ${({ theme }) => theme.font.family.medium};
 	color: #fff;
 	text-align: center;
 `;
