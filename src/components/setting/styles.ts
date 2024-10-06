@@ -9,7 +9,7 @@ export const Button = styled.TouchableOpacity`
 `;
 
 export const Icon = styled.View`
-	justify-content: start;
+	justify-content: center;
 	height: ${moderateScale(32)}px;
 	background-color: ${(props) => props.theme.colors.grayscale.gray_20};
 	border-radius: ${moderateScale(8)}px;

@@ -2,9 +2,10 @@ import { BackButton } from "@/components/back-button";
 import Setting from "@/components/setting";
 import { User } from "@/components/user";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks/useApp";
-
 import { setThemeStatus } from "@/redux/reducers/theme-reducer";
-import { Feather, MaterialCommunityIcons } from "@expo/vector-icons";
+import { onLogout } from "@/redux/reducers/user-reducer";
+import { Feather } from "@expo/vector-icons";
+import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import * as C from "./styles";
 
 export default function Config() {
@@ -37,14 +38,9 @@ export default function Config() {
 
 				<C.Category>Contéudo</C.Category>
 				<Setting
-					ItemTitle="Tema"
-					icon={
-						<MaterialCommunityIcons
-							name="palette-outline"
-							size={24}
-							color="black"
-						/>
-					}
+					ItemTitle="Logout"
+					icon={<MaterialIcons name="logout" size={20} color="black" />}
+					onPress={() => dispatch(onLogout())}
 				/>
 			</C.Main>
 		</C.Container>

@@ -1,8 +1,8 @@
 import { Input } from "@/components/input";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks/useApp";
 import { signInUser } from "@/redux/reducers/user-reducer";
-import { schemaLogin } from "@/utils/schemas/schema-login";
-import { zodResolver } from "@hookform/resolvers/zod";
+import { loginSchema } from "@/utils/schemas/schema-login";
+import { yupResolver } from "@hookform/resolvers/yup";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { ActivityIndicator } from "react-native";
 import * as C from "./styles";
@@ -21,7 +21,7 @@ export default function Login() {
 		handleSubmit,
 		formState: { errors },
 	} = useForm<ILogin>({
-		resolver: zodResolver(schemaLogin),
+		resolver: yupResolver(loginSchema),
 	});
 
 	const onSubmit: SubmitHandler<ILogin> = async (formData: ILogin) => {

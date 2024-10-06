@@ -21,7 +21,7 @@ export default function Home() {
 					rowGap: 16,
 				}}
 			>
-				<Order />
+				<Order onPress={() => navigation.navigate("vistoria")} />
 				<Order />
 				<Order />
 				<Order />

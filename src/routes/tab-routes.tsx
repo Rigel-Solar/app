@@ -2,6 +2,7 @@ import { useAppSelector } from "@/redux/hooks/useApp";
 import Config from "@/screens/Config";
 import Home from "@/screens/Home";
 import Login from "@/screens/Login";
+import Vistoria from "@/screens/Vistoria";
 import { AntDesign, Octicons } from "@expo/vector-icons";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { NavigationContainer } from "@react-navigation/native";
@@ -10,6 +11,8 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 export type RootStackParams = {
 	bottomBar: any;
 	home: any;
+	config: any;
+	vistoria: any;
 	login: any;
 };
 
@@ -65,11 +68,18 @@ export function AppRoutes() {
 			<Stack.Navigator screenOptions={{ headerShown: false }}>
 				<>
 					{user.token ? (
-						<Stack.Screen
-							name="bottomBar"
-							component={TabRoutes}
-							options={{ headerShown: false }}
-						/>
+						<>
+							<Stack.Screen
+								name="bottomBar"
+								component={TabRoutes}
+								options={{ headerShown: false }}
+							/>
+							<Stack.Screen
+								name="vistoria"
+								component={Vistoria}
+								options={{ headerShown: false }}
+							/>
+						</>
 					) : (
 						<Stack.Screen name="login" component={Login} />
 					)}
