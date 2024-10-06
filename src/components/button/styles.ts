@@ -74,6 +74,7 @@ export const ButtonStyles = css<buttonStyleProps>`
 	align-items: center;
 	justify-content: center;
 	border-radius: ${moderateScale(6)}px;
+	margin: 0 ${moderateScale(6)}px;
 	padding: ${moderateScale(8)}px;
 	gap: ${moderateScale(8)}px;
 	${({ $buttonStyle }) => styles[$buttonStyle]};

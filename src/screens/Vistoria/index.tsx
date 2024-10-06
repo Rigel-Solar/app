@@ -1,3 +1,4 @@
+import { BackButton } from "@/components/back-button";
 import { Button } from "@/components/button";
 import { RootStackParams } from "@/routes/tab-routes";
 import { orders } from "@/utils/constants/orders";
@@ -10,7 +11,12 @@ export default function Vistoria() {
 		useNavigation<NativeStackNavigationProp<RootStackParams>>();
 
 	return (
-		<C.Container>
+		<C.Container
+			contentContainerStyle={{
+				rowGap: 16,
+			}}
+		>
+			<BackButton />
 			<C.Main>
 				<C.FakeInput>
 					<C.Label>E-mail</C.Label>
@@ -65,7 +71,9 @@ export default function Vistoria() {
 					<C.Value>{orders.comments}</C.Value>
 				</C.FakeInput>
 			</C.Main>
-			<Button>Criar Relatório</Button>
+			<C.ButtonArea>
+				<Button>Criar Relatório</Button>
+			</C.ButtonArea>
 		</C.Container>
 	);
 }

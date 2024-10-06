@@ -3,12 +3,13 @@ import styled from "styled-components/native";
 
 export const Container = styled.ScrollView`
 	flex: 1;
-	padding: 70px 20px;
+	padding: 10px;
 	background-color: ${({ theme }) => theme.colors.brand.background};
 `;
 
-export const Main = styled.View`
-	margin-bottom: 40px;
+export const Main = styled.ScrollView`
+	flex: 1;
+	padding: 0 10px;
 `;
 
 export const Row = styled.View`
@@ -36,3 +37,7 @@ export const Value = styled.Text`
 	color: ${({ theme }) => theme.colors.fake_input.value};
 `;
 
+export const ButtonArea = styled.View`
+	flex: 1;
+	padding-bottom: 30px;
+`;

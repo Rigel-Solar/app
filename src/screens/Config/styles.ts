@@ -3,7 +3,7 @@ import styled from "styled-components/native";
 
 export const Container = styled.ScrollView`
 	flex: 1;
-	padding: 70px 20px;
+	padding: 20px;
 	background-color: ${({ theme }) => theme.colors.brand.background};
 `;
 

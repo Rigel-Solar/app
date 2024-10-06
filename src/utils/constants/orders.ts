@@ -19,7 +19,7 @@ const orders: OrderTS = {
 	time: "3 months",
 	light_cost: 120.5,
 	concessionaires: "Concessionaire 1",
-	comments: "Install as soon as possible",
+	comments: "Install as soon as possible,Install as soon as possible,",
 };
 
 export { orders };
