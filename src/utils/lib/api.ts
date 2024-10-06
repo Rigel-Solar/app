@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const reqRes = process.env.API_URL;
+const reqRes = "https://reqres.in/api";
 
 export const api = axios.create({
 	baseURL: reqRes,

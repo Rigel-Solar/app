@@ -8,7 +8,6 @@ export type buttonState = "normal" | "error" | "success";
 
 interface ButtonProps extends TouchableOpacityProps {
 	icon?: ReactNode;
-	text?: string;
 	buttonStyle?: buttonStyle;
 	buttonState?: buttonState;
 	isLoading?: boolean;
@@ -17,7 +16,6 @@ interface ButtonProps extends TouchableOpacityProps {
 export function Button({
 	children,
 	icon,
-	text,
 	buttonStyle = "primary",
 	buttonState = "normal",
 	isLoading = false,
@@ -40,7 +38,7 @@ export function Button({
 					$buttonState: buttonState,
 				}}
 			>
-				{text}
+				{children}
 			</C.ButtonText>
 			{isLoading && <Loading />}
 		</C.ButtonContainer>

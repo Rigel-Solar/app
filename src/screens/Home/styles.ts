@@ -2,7 +2,7 @@ import styled from "styled-components/native";
 
 export const Container = styled.ScrollView`
 	flex: 1;
-	padding: 70px 30px;
+	padding: 70px 20px;
 	background-color: ${({ theme }) => theme.colors.brand.background};
 `;
 
@@ -22,6 +22,7 @@ export const TitleArea = styled.View`
 `;
 
 export const Title = styled.Text`
+	color: ${({ theme }) => theme.colors.brand.text};
 	font-family: ${({ theme }) => theme.font.family.medium};
 	font-size: ${({ theme }) => theme.font.size.heading.lg}px;
 `;
@@ -29,7 +30,7 @@ export const Title = styled.Text`
 export const Description = styled.Text`
 	font-family: ${({ theme }) => theme.font.family.regular};
 	font-size: ${({ theme }) => theme.font.size.body.md}px;
-	color: ${({ theme }) => theme.colors.grayscale.gray_80};
+	color: ${({ theme }) => theme.colors.fake_input.label};
 `;
 
 export const Button = styled.TouchableOpacity`

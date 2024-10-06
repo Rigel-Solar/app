@@ -1,6 +1,5 @@
 import { moderateScale } from "@/styles/metrics";
-import { css } from "styled-components";
-import styled from "styled-components/native";
+import styled, { css } from "styled-components/native";
 import { buttonState, buttonStyle } from ".";
 
 export interface buttonStyleProps {
@@ -10,11 +9,11 @@ export interface buttonStyleProps {
 }
 
 const primary = css`
-	background-color: ${(props) => props.theme.colors.pink};
+	background-color: ${(props) => props.theme.colors.brand.rigel};
 `;
 
 const secondary = css`
-	border: 1px solid ${(props) => props.theme.colors.slate_200};
+	border: 1px solid ${(props) => props.theme.colors.grayscale.gray_20};
 	background-color: transparent;
 `;
 
@@ -60,9 +59,8 @@ const stateStyles = {
 
 export const TextStyles = css<buttonStyleProps>`
 	padding: 0;
-	font-family: ${({ theme }) => theme.font.family.regular};
-	color: ${({ $buttonStyle }) =>
-		$buttonStyle === "primary" ? "#fff" : "#000"};
+	font-family: ${({ theme }) => theme.font.family.medium};
+	color: ${(props) => props.theme.colors.brand.white};
 `;
 
 export const ButtonText = styled.Text<buttonStyleProps>`

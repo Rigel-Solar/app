@@ -8,7 +8,7 @@ export const Container = styled.KeyboardAvoidingView`
 export const Wrapper = styled.View`
 	flex: 1;
 	justify-content: space-between;
-	padding: 70px 20px;
+	padding: 70px 20px 40px 20px;
 `;
 
 export const Form = styled.View`

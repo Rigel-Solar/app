@@ -12,6 +12,7 @@ export default {
 			rigel: "#0066D2",
 			modal: "#09090B",
 			text: "#fff",
+			order: "#373738",
 		},
 		support: {
 			support_01: "#BEDCE4",

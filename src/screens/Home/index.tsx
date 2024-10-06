@@ -2,7 +2,6 @@ import { Order } from "@/components/order/order";
 import { RootStackParams } from "@/routes/tab-routes";
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import { Text } from "react-native";
 import * as C from "./styles";
 
 export default function Home() {

@@ -3,7 +3,7 @@ import styled from "styled-components/native";
 export const Container = styled.View`
 	gap: 20px;
 	border-radius: 6px;
-	background-color: #fafafa;
+	background-color: ${({ theme }) => theme.colors.brand.order};
 	shadow-color: #000;
 	shadow-offset: 0 100px;
 	shadow-opacity: 0.25;
@@ -34,8 +34,10 @@ export const Footer = styled.View`
 
 export const Title = styled.Text`
 	font-family: ${({ theme }) => theme.font.family.medium};
+	color: ${({ theme }) => theme.colors.brand.text};
 `;
 
 export const Text = styled.Text`
 	font-family: ${({ theme }) => theme.font.family.regular};
+	color: ${({ theme }) => theme.colors.brand.text};
 `;
