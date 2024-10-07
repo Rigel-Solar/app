@@ -21,8 +21,8 @@ export const Row = styled.View`
 export const FakeInput = styled.View`
 	flex: 1;
 	border-bottom-width: 1px;
-	padding: ${verticalScale(10)}px 0;
 	border-color: ${({ theme }) => theme.colors.grayscale.gray_30};
+	padding: ${verticalScale(10)}px 0;
 `;
 
 export const Label = styled.Text`

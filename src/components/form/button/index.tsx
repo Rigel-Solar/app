@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
 import { TouchableOpacityProps } from "react-native";
-import { Loading } from "../loading";
+import { Loading } from "../../loading";
 import * as C from "./styles";
 
 export type buttonStyle = "primary" | "secondary";
@@ -8,6 +8,7 @@ export type buttonState = "normal" | "error" | "success";
 
 interface ButtonProps extends TouchableOpacityProps {
 	icon?: ReactNode;
+	iconRight?: boolean;
 	buttonStyle?: buttonStyle;
 	buttonState?: buttonState;
 	isLoading?: boolean;
@@ -16,6 +17,7 @@ interface ButtonProps extends TouchableOpacityProps {
 export function Button({
 	children,
 	icon,
+	iconRight,
 	buttonStyle = "primary",
 	buttonState = "normal",
 	isLoading = false,
@@ -30,7 +32,7 @@ export function Button({
 				$buttonState: buttonState,
 			}}
 		>
-			{icon}
+			{!iconRight ? icon : null}
 			<C.ButtonText
 				{...{
 					...props,
@@ -40,6 +42,7 @@ export function Button({
 			>
 				{children}
 			</C.ButtonText>
+			{iconRight ? icon : null}
 			{isLoading && <Loading />}
 		</C.ButtonContainer>
 	);

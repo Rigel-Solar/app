@@ -10,19 +10,21 @@ import {
 	persistReducer,
 } from "redux-persist";
 import persistStore from "redux-persist/es/persistStore";
-import userReducer from "./reducers/user-reducer";
+import banhoReducer from "./reducers/banho-reducer";
 import themeReducer from "./reducers/theme-reducer";
+import userReducer from "./reducers/user-reducer";
 
 const rootReducer = combineReducers({
 	user: userReducer,
-  theme: themeReducer
+	theme: themeReducer,
+	banho: banhoReducer,
 });
 
 const persistConfig = {
 	key: "root",
 	storage: AsyncStorage,
 	version: 1,
-	whitelist: ["user", "theme"],
+	whitelist: ["user", "theme", "banho"],
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

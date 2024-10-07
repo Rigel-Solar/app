@@ -1,5 +1,5 @@
 import { BackButton } from "@/components/back-button";
-import { Button } from "@/components/button";
+import { Button } from "@/components/form/button";
 import { RootStackParams } from "@/routes/tab-routes";
 import { orders } from "@/utils/constants/orders";
 import { useNavigation } from "@react-navigation/native";
@@ -72,7 +72,9 @@ export default function Vistoria() {
 				</C.FakeInput>
 			</C.Main>
 			<C.ButtonArea>
-				<Button>Criar Relatório</Button>
+				<Button onPress={() => navigation.navigate("banho")}>
+					Criar Relatório
+				</Button>
 			</C.ButtonArea>
 		</C.Container>
 	);

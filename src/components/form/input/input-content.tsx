@@ -24,8 +24,8 @@ const InputContent = ({
 		<Input
 			onChangeText={onChange}
 			placeholder={placeholderText}
-			secureTextEntry={hasSecureTextEntry}
 			placeholderTextColor="#7A8282"
+			secureTextEntry={hasSecureTextEntry}
 			keyboardType={keyboardType}
 			multiline={multiline}
 			numberOfLines={numberOfLines}
@@ -35,12 +35,13 @@ const InputContent = ({
 };
 
 const Input = styled.TextInput`
-	border: 1px solid #ccc;
-	color: ${(props) => props.theme.color};
+	border-bottom-width: 1px;
+	border-color: ${({ theme }) => theme.colors.grayscale.gray_30};
+	color: ${({ theme }) => theme.colors.fake_input.value};
 	font-family: ${({ theme }) => theme.font.family.regular};
+	font-size: ${({ theme }) => theme.font.size.body.xs}px;
 	border-radius: 4px;
-	padding: 12px;
-	min-width: 29%;
+	padding: 4px;
 `;
 
 export default InputContent;

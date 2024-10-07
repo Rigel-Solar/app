@@ -1,9 +1,8 @@
-interface InspectionItem {
-	quantity: string | null;
-	description: string;
-}
+import { Client } from "./client";
 
-export interface Banho {
+export type BanhoTS = {
+	_id?: string;
+	client: Client;
 	orderId: number;
 	technician: string;
 	name: string;
@@ -11,9 +10,14 @@ export interface Banho {
 	state: string;
 	street: string;
 	number: number;
-	imgUrl: Array<string>;
+	imgUrl?: string[];
 	neighborhood: string;
 	type: string;
 	cellphone: string;
-	inspectionItems: InspectionItem[];
-}
+	BaseCaixa?: number;
+	BaseBoiler?: number;
+	DistanciaBoiler?: number;
+	RegistroCaixa?: number;
+	RegistroBarrilete?: number;
+	DisjuntorBipolar?: number;
+};

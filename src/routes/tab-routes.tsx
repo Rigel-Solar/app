@@ -1,4 +1,5 @@
 import { useAppSelector } from "@/redux/hooks/useApp";
+import Banho from "@/screens/Banho";
 import Config from "@/screens/Config";
 import Home from "@/screens/Home";
 import Login from "@/screens/Login";
@@ -14,6 +15,7 @@ export type RootStackParams = {
 	config: any;
 	vistoria: any;
 	login: any;
+	banho: any;
 };
 
 const Tab = createBottomTabNavigator();
@@ -77,6 +79,11 @@ export function AppRoutes() {
 							<Stack.Screen
 								name="vistoria"
 								component={Vistoria}
+								options={{ headerShown: false }}
+							/>
+							<Stack.Screen
+								name="banho"
+								component={Banho}
 								options={{ headerShown: false }}
 							/>
 						</>

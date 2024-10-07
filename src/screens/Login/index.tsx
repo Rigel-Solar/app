@@ -1,4 +1,4 @@
-import { Input } from "@/components/input";
+import { Input } from "@/components/form/input";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks/useApp";
 import { signInUser } from "@/redux/reducers/user-reducer";
 import { loginSchema } from "@/utils/schemas/schema-login";

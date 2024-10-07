@@ -10,7 +10,6 @@ import * as C from "./styles";
 
 export default function Config() {
 	const dispatch = useAppDispatch();
-	const user = useAppSelector((state) => state.user.user);
 	const theme = useAppSelector((state) => state.theme);
 
 	const handleModeToggle = () => {
