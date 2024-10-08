@@ -1,10 +1,5 @@
 import * as yup from "yup";
 
-const inspectionItemSchema = yup.object().shape({
-	quantity: yup.string().nullable(),
-	description: yup.string().required("Descrição é obrigatória"),
-});
-
 const banhoSchema = yup.object().shape({
 	// orderId: yup.number().required("ID do pedido é obrigatório"),
 	// technician: yup.string().required("Nome do técnico é obrigatório"),
