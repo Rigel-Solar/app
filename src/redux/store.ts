@@ -11,8 +11,6 @@ import {
 } from "redux-persist";
 import persistStore from "redux-persist/es/persistStore";
 import banhoReducer from "./reducers/banho-reducer";
-import fotovoltaicoReducer from "./reducers/fotovoltaico-reducer";
-import piscinaReducer from "./reducers/piscina-reducer";
 import themeReducer from "./reducers/theme-reducer";
 import userReducer from "./reducers/user-reducer";
 
@@ -20,15 +18,13 @@ const rootReducer = combineReducers({
 	user: userReducer,
 	theme: themeReducer,
 	banho: banhoReducer,
-	piscina: piscinaReducer,
-	fotovoltaico: fotovoltaicoReducer,
 });
 
 const persistConfig = {
 	key: "root",
 	storage: AsyncStorage,
 	version: 1,
-	whitelist: ["user", "theme", "banho", "piscina", "fotovoltaico"],
+	whitelist: ["user", "theme", "banho"],
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

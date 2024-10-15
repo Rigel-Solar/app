@@ -10,6 +10,15 @@ export const Form = styled.ScrollView`
 	flex: 1;
 `;
 
+<<<<<<< HEAD
+=======
+export const Title = styled.Text`
+	color: ${({ theme }) => theme.colors.brand.text};
+	font-family: ${(props) => props.theme.font.family.medium};
+	font-size: ${(props) => props.theme.font.size.body.md}px;
+`;
+
+>>>>>>> 25a5588d41bd67d64bd9f9ac6164f4d73af11cbe
 export const Label = styled.Text`
 	color: ${({ theme }) => theme.colors.brand.text};
 	font-family: ${(props) => props.theme.font.family.regular};
