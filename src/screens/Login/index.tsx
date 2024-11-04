@@ -1,39 +1,47 @@
 import { Input } from "@/components/form/input";
-import { useAppDispatch, useAppSelector } from "@/redux/hooks/useApp";
-import { signInUser } from "@/redux/reducers/user-reducer";
+import { useAppDispatch } from "@/redux/hooks/useApp";
+import { addToken, LoginTS } from "@/redux/reducers/user-reducer";
 import { loginSchema } from "@/utils/schemas/schema-login";
+import { useMutationQuery } from "@/utils/services/hooks/useMutationQuery";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { ActivityIndicator } from "react-native";
 import * as C from "./styles";
 
-interface ILogin {
-	email: string;
-	password: string;
-}
-
 export default function Login() {
 	const dispatch = useAppDispatch();
-	const { loading, error } = useAppSelector((state) => state.user);
 
 	const {
 		control,
 		handleSubmit,
 		formState: { errors },
-	} = useForm<ILogin>({
+	} = useForm<LoginTS>({
 		resolver: yupResolver(loginSchema),
 	});
 
-	const onSubmit: SubmitHandler<ILogin> = async (formData: ILogin) => {
-		await dispatch(signInUser(formData));
-		console.log(error);
+	const {
+		mutate: onLogin,
+		isLoading,
+		isError,
+	} = useMutationQuery(`/Auth/`, "post");
+
+	const onSubmit: SubmitHandler<LoginTS> = async (formData: LoginTS) => {
+		console.log(formData)
+		onLogin(formData, {
+			onSuccess: (response) => {
+				dispatch(addToken(response.data.token));
+			},
+			onError: (error) => {
+				console.log("Erro", error);
+			},
+		});
 	};
 
 	return (
 		<C.Container>
 			<C.Wrapper>
 				<C.Form>
-					{error && (
+					{isError && (
 						<C.ViewError>
 							<C.TextError>Usuário nao encontrado</C.TextError>
 						</C.ViewError>
@@ -70,7 +78,7 @@ export default function Login() {
 				</C.Form>
 				<C.Button onPress={handleSubmit(onSubmit)}>
 					<C.ButtonText>
-						{loading ? <ActivityIndicator /> : "Login"}
+						{isLoading ? <ActivityIndicator /> : "Login"}
 					</C.ButtonText>
 				</C.Button>
 			</C.Wrapper>

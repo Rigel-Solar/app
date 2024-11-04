@@ -1,25 +1,43 @@
-import { OrderTS } from "@/models/order";
+import { PedidoTS } from "@/models/pedido";
 
-const orders: OrderTS = {
-	client: {
-		name: "John Doe",
-		email: "johndoe@example.com",
-		type: "Individual",
-		address: {
-			street: "Main Street",
-			number: "123",
-			city: "Sample City",
-			neighbourhood: "Central",
-			zipCode: "00000-000",
+export const orders: PedidoTS = {
+	id: 1,
+	fichaBanhos: [
+		{ tipo: "banho elétrico", consumo: 200 },
+		{ tipo: "chuveiro solar", consumo: 100 },
+	],
+	fichaFotovoltaicos: [
+		{ modelo: "Painel A", capacidade: 300 },
+		{ modelo: "Painel B", capacidade: 400 },
+	],
+	fichaPiscinas: [{ volume: 5000, tipo: "aquecimento solar" }],
+	clienteDTO: {
+		tipo: "residencial",
+		nome: "João Silva",
+		email: "joao.silva@email.com",
+		endereco: "Cidade Exemplo, Bairro Exemplo, Rua Exemplo, 53, 07809060",
+		latitude: -23.5505,
+		longitude: -46.6333,
+	},
+	gestorDTO: {
+		id: 10,
+		idUsuario: 101,
+		idUsuarioNavigation: null,
+	},
+	tecnicoDTO: {
+		crea: "123456-SP",
+		usuario: {
+			nome: "Carlos Oliveira",
+			email: "carlos.oliveira@empresa.com",
+			id: "tecnico001",
 		},
 	},
-	technician: "Jane Smith",
-	type_person: "Residential",
-	type_order: "Installation",
-	time: "3 months",
-	light_cost: 120.5,
-	concessionaires: "Concessionaire 1",
-	comments: "Install as soon as possible,Install as soon as possible,",
+	idGestor: 10,
+	idTecnico: 20,
+	idCliente: 30,
+	tipoInstalacao: "Fotovoltaica",
+	solucoes: "Instalação de painéis solares e aquecimento de água",
+	pretendeInstalarEm: "3 meses",
+	valorContaLuz: 350,
+	comentarios: "Cliente interessado em reduzir custo com energia elétrica.",
 };
-
-export { orders };

@@ -31,8 +31,8 @@ export default function Config() {
 			<C.Main>
 				<C.ProfileArea>
 					<User />
-					<C.Name>Malcolm Lima</C.Name>
-					<C.Email>malcolmlima@email.com</C.Email>
+					<C.Name>John Doe</C.Name>
+					<C.Email>johndoe@gmail.com</C.Email>
 				</C.ProfileArea>
 
 				<C.Category>Contéudo</C.Category>

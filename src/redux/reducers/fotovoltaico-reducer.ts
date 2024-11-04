@@ -143,15 +143,127 @@ export const slice = createSlice({
 		setFotovoltaico: (state, action: PayloadAction<FotovoltaicoTS>) => {
 			return action.payload;
 		},
-		updateField: <K extends keyof FotovoltaicoTS>(
-			state: FotovoltaicoTS,
-			action: PayloadAction<{ field: K; value: FotovoltaicoTS[K] }>
+		updateSistemaFotovoltaico: (
+			state,
+			action: PayloadAction<Partial<FotovoltaicoTS>>
 		) => {
-			const { field, value } = action.payload;
-			state[field] = value;
+			Object.assign(state, action.payload);
+		},
+		updatePadraoEntrada: (
+			state,
+			action: PayloadAction<Partial<FotovoltaicoTS>>
+		) => {
+			state.concessionariaEnergiaPe =
+				action.payload.concessionariaEnergiaPe ?? state.concessionariaEnergiaPe;
+			state.demandaContratadaPe =
+				action.payload.demandaContratadaPe ?? state.demandaContratadaPe;
+			state.tipoClienteDTO = {
+				...state.tipoClienteDTO,
+				...action.payload.tipoClienteDTO,
+			};
+			state.tipoLigacaoDTO = {
+				...state.tipoLigacaoDTO,
+				...action.payload.tipoLigacaoDTO,
+			};
+			state.tensaoNominalDTO = {
+				...state.tensaoNominalDTO,
+				...action.payload.tensaoNominalDTO,
+			};
+			state.condicaoPadraoEntradaDTO = {
+				...state.condicaoPadraoEntradaDTO,
+				...action.payload.condicaoPadraoEntradaDTO,
+			};
+			state.dimensaoCaixaPadraoPe =
+				action.payload.dimensaoCaixaPadraoPe ?? state.dimensaoCaixaPadraoPe;
+			state.modeloRelogioDTO = {
+				...state.modeloRelogioDTO,
+				...action.payload.modeloRelogioDTO,
+			};
+			state.aterramentoPe = action.payload.aterramentoPe ?? state.aterramentoPe;
+			state.disjuntorPadraoEntradaPe =
+				action.payload.disjuntorPadraoEntradaPe ??
+				state.disjuntorPadraoEntradaPe;
+			state.bitolaCondutorPe =
+				action.payload.bitolaCondutorPe ?? state.bitolaCondutorPe;
+		},
+		updateQuadroPrincipal: (
+			state,
+			action: PayloadAction<Partial<FotovoltaicoTS>>
+		) => {
+			state.disjuntorQuadroPrincipalQpe =
+				action.payload.disjuntorQuadroPrincipalQpe ??
+				state.disjuntorQuadroPrincipalQpe;
+			state.condicaoQuadroPrincipalDTO = {
+				...state.condicaoQuadroPrincipalDTO,
+				...action.payload.condicaoQuadroPrincipalDTO,
+			};
+			state.bitolaCondutorPe =
+				action.payload.bitolaCondutorPe ?? state.bitolaCondutorPe;
+			state.aterramentoPe = action.payload.aterramentoPe ?? state.aterramentoPe;
+		},
+		updateLocalInstalacao: (
+			state,
+			action: PayloadAction<Partial<FotovoltaicoTS>>
+		) => {
+			state.localInstalacaoModuloDTO = {
+				...state.localInstalacaoModuloDTO,
+				...action.payload.localInstalacaoModuloDTO,
+			};
+			state.idadeTelhadoDTO = {
+				...state.idadeTelhadoDTO,
+				...action.payload.idadeTelhadoDTO,
+			};
+			state.materialVigasTelhadoDTO = {
+				...state.materialVigasTelhadoDTO,
+				...action.payload.materialVigasTelhadoDTO,
+			};
+			state.condicaoVigaDTO = {
+				...state.condicaoVigaDTO,
+				...action.payload.condicaoVigaDTO,
+			};
+		},
+		updateSolo: (state, action: PayloadAction<Partial<FotovoltaicoTS>>) => {
+			state.larguraSolo = action.payload.larguraSolo;
+			state.comprimentoSolo = action.payload.comprimentoSolo;
+			state.nivelamentoSoloDTO = {
+				...state.nivelamentoSoloDTO,
+				...action.payload.nivelamentoSoloDTO,
+			};
+			state.tipoSuperficieDTO = {
+				...state.tipoSuperficieDTO,
+				...action.payload.tipoSuperficieDTO,
+			};
+		},
+		updateTelhado: (state, action: PayloadAction<Partial<FotovoltaicoTS>>) => {
+			state.telhadoAcessoDTO = {
+				...state.telhadoAcessoDTO,
+				...action.payload.telhadoAcessoDTO,
+			};
+			state.tipoTelha = action.payload.tipoTelha ?? state.tipoTelha;
+			state.distanciaRipasTelhado =
+				action.payload.distanciaRipasTelhado ?? state.distanciaRipasTelhado;
+			state.distanciaCaibrosTelhado =
+				action.payload.distanciaCaibrosTelhado ?? state.distanciaCaibrosTelhado;
+			state.distanciaTercasTelhado =
+				action.payload.distanciaTercasTelhado ?? state.distanciaTercasTelhado;
+			state.distanciaEmpenaTelhado =
+				action.payload.distanciaEmpenaTelhado ?? state.distanciaEmpenaTelhado;
+			state.condicaoVigaDTO = {
+				...state.condicaoVigaDTO,
+				...action.payload.condicaoVigaDTO,
+			};
 		},
 	},
 });
 
-export const { setFotovoltaico, updateField } = slice.actions;
+export const {
+	setFotovoltaico,
+	updateSistemaFotovoltaico,
+	updatePadraoEntrada,
+	updateQuadroPrincipal,
+	updateLocalInstalacao,
+	updateSolo,
+	updateTelhado,
+} = slice.actions;
+
 export default slice.reducer;

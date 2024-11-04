@@ -1,6 +1,11 @@
 import { useAppSelector } from "@/redux/hooks/useApp";
 import Banho from "@/screens/Banho";
 import Config from "@/screens/Config";
+import InstalacaoModuloFormScreen from "@/screens/Fotovoltaico/InstalacaoModuloForm";
+import PadraoEntradaFormScreen from "@/screens/Fotovoltaico/PadraoEntradaForm";
+import QuadroPrincipalFormScreen from "@/screens/Fotovoltaico/QuadroPrincipalForm";
+import SoloFormScreen from "@/screens/Fotovoltaico/SoloForm";
+import TelhadoFormScreen from "@/screens/Fotovoltaico/TelhadoForm";
 import Home from "@/screens/Home";
 import Login from "@/screens/Login";
 import Vistoria from "@/screens/Vistoria";
@@ -10,12 +15,17 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 export type RootStackParams = {
-	bottomBar: any;
-	home: any;
-	config: any;
-	vistoria: any;
-	login: any;
-	banho: any;
+	bottomBar: undefined;
+	home: undefined;
+	config: undefined;
+	vistoria: undefined;
+	login: undefined;
+	banho: undefined;
+	padraoEntradaForm: undefined;
+	quadroPrincipalForm: undefined;
+	instalacaoModuloForm: undefined;
+	soloForm: undefined;
+	telhadoForm: undefined;
 };
 
 const Tab = createBottomTabNavigator();
@@ -86,6 +96,20 @@ export function AppRoutes() {
 								component={Banho}
 								options={{ headerShown: false }}
 							/>
+							<Stack.Screen
+								name="padraoEntradaForm"
+								component={PadraoEntradaFormScreen}
+							/>
+							<Stack.Screen
+								name="quadroPrincipalForm"
+								component={QuadroPrincipalFormScreen}
+							/>
+							<Stack.Screen
+								name="instalacaoModuloForm"
+								component={InstalacaoModuloFormScreen}
+							/>
+							<Stack.Screen name="soloForm" component={SoloFormScreen} />
+							<Stack.Screen name="telhadoForm" component={TelhadoFormScreen} />
 						</>
 					) : (
 						<Stack.Screen name="login" component={Login} />
