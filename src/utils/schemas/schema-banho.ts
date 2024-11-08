@@ -15,12 +15,13 @@ const banhoSchema = yup.object().shape({
 	// 	.string()
 	// 	.matches(/^\d{10,11}$/, "Número de telefone deve ter 10 ou 11 dígitos")
 	// 	.required("Telefone é obrigatório"),
-	BaseCaixa: yup.number().optional(),
-	BaseBoiler: yup.number().optional(),
-	DistanciaBoiler: yup.number().optional(),
-	RegistroCaixa: yup.number().optional(),
-	RegistroBarrilete: yup.number().optional(),
-	DisjuntorBipolar: yup.number().optional(),
+	baseCaixa: yup.number().required("Obrigatório"),
+	baseBoiler: yup.number().required("Obrigatório"),
+	distanciaBoiler: yup.number().required("Obrigatório"),
+	registroCaixa: yup.number().required("Obrigatório"),
+	registroBarrilete: yup.number().required("Obrigatório"),
+	disjuntorBipolar: yup.number().required("Obrigatório"),
+	idVistoria: yup.number().optional(),
 });
 
 type BanhoTS = yup.InferType<typeof banhoSchema>;

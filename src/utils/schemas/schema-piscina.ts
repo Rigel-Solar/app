@@ -12,8 +12,8 @@ const piscinaSchema = yup.object().shape({
 	usoCapaTermica: yup.string().optional(),
 	regiao: yup.string().optional(),
 	ambiente: yup.string().optional(),
-	area: yup.number().optional(),
-	volume: yup.number().optional(),
+	// area: yup.number().optional(),
+	// volume: yup.number().optional(),
 });
 
 type PiscinaTS = yup.InferType<typeof piscinaSchema>;

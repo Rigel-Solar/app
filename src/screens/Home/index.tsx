@@ -1,7 +1,6 @@
 import { Order } from "@/components/order/order";
 import { PedidoTS } from "@/models/pedido";
 import { RootStackParams } from "@/routes/tab-routes";
-import { orders } from "@/utils/constants/orders";
 import { useFetch } from "@/utils/services/hooks/getQuery";
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
@@ -22,10 +21,6 @@ export default function Home() {
 			onError: (error) => {
 				console.log("Error:", error);
 			},
-			staleTime: 1000 * 6 * 60,
-			cacheTime: 1000 * 6 * 60,
-			keepPreviousData: true,
-			refetchOnWindowFocus: false,
 		}
 	);
 
@@ -37,11 +32,7 @@ export default function Home() {
 					<C.Description>Total 7 Pedidos</C.Description>
 				</C.TitleArea>
 			</C.Header>
-			<C.Main
-				contentContainerStyle={{
-					rowGap: 16,
-				}}
-			>
+			<C.Main>
 				<FlatList
 					showsHorizontalScrollIndicator={false}
 					contentContainerStyle={{ gap: 12 }}
@@ -49,7 +40,9 @@ export default function Home() {
 					data={pedidos}
 					renderItem={({ item }) => (
 						<Order
-							onPress={() => navigation.navigate("vistoria")}
+							onPress={() =>
+								navigation.navigate("vistoria", { orderData: item })
+							}
 							data={item}
 						/>
 					)}

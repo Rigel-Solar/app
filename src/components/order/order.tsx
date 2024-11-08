@@ -32,8 +32,7 @@ export function Order({ data, ...props }: OrderTS) {
 	return (
 		<C.Container {...props}>
 			<C.Header>
-				<C.Title>Fotovoltáico</C.Title>
-				<Badge $status="Em andamento" />
+				<C.Title>{data.solucoes}</C.Title>
 			</C.Header>
 			<C.Description>
 				<C.Text>

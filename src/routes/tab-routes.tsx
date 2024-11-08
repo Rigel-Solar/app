@@ -1,3 +1,4 @@
+import { PedidoTS } from "@/models/pedido";
 import { useAppSelector } from "@/redux/hooks/useApp";
 import Banho from "@/screens/Banho";
 import Config from "@/screens/Config";
@@ -8,6 +9,7 @@ import SoloFormScreen from "@/screens/Fotovoltaico/SoloForm";
 import TelhadoFormScreen from "@/screens/Fotovoltaico/TelhadoForm";
 import Home from "@/screens/Home";
 import Login from "@/screens/Login";
+import Piscina from "@/screens/Piscina";
 import Vistoria from "@/screens/Vistoria";
 import { AntDesign, Octicons } from "@expo/vector-icons";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
@@ -18,14 +20,15 @@ export type RootStackParams = {
 	bottomBar: undefined;
 	home: undefined;
 	config: undefined;
-	vistoria: undefined;
+	vistoria: { orderData: PedidoTS };
+	piscina: { orderData: PedidoTS };
 	login: undefined;
-	banho: undefined;
-	padraoEntradaForm: undefined;
-	quadroPrincipalForm: undefined;
-	instalacaoModuloForm: undefined;
-	soloForm: undefined;
-	telhadoForm: undefined;
+	banho: { orderData: PedidoTS };
+	padraoEntradaForm: { orderData: PedidoTS };
+	quadroPrincipalForm: { orderData: PedidoTS };
+	instalacaoModuloForm: { orderData: PedidoTS };
+	soloForm: { orderData: PedidoTS };
+	telhadoForm: { orderData: PedidoTS };
 };
 
 const Tab = createBottomTabNavigator();
@@ -94,6 +97,11 @@ export function AppRoutes() {
 							<Stack.Screen
 								name="banho"
 								component={Banho}
+								options={{ headerShown: false }}
+							/>
+							<Stack.Screen
+								name="piscina"
+								component={Piscina}
 								options={{ headerShown: false }}
 							/>
 							<Stack.Screen

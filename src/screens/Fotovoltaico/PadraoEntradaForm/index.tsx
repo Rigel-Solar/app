@@ -3,7 +3,7 @@ import { FormFieldsContainer } from "@/components/form/form";
 import { Input } from "@/components/form/input";
 import { RootStackParams } from "@/routes/tab-routes";
 import { Ionicons } from "@expo/vector-icons";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import React from "react";
 import { Controller } from "react-hook-form";
@@ -17,6 +17,7 @@ interface PadraoEntradaFormProps {
 
 import { useAppDispatch } from "@/redux/hooks/useApp";
 import { updatePadraoEntrada } from "@/redux/reducers/fotovoltaico-reducer";
+import { VistoriaRouteProp } from "@/screens/Vistoria";
 import {
 	fotovoltaicoSchema,
 	FotovoltaicoTS,
@@ -26,6 +27,8 @@ import { useForm } from "react-hook-form";
 import { ScrollView } from "react-native";
 
 const PadraoEntradaFormScreen = () => {
+	const route = useRoute<VistoriaRouteProp>();
+	const { orderData } = route.params;
 	const dispatch = useAppDispatch();
 	const navigation =
 		useNavigation<NativeStackNavigationProp<RootStackParams>>();
@@ -39,7 +42,7 @@ const PadraoEntradaFormScreen = () => {
 
 	const onSubmit = (formData: FotovoltaicoTS) => {
 		dispatch(updatePadraoEntrada(formData));
-		navigation.navigate("quadroPrincipalForm");
+		navigation.navigate("quadroPrincipalForm", { orderData: orderData });
 	};
 
 	return (

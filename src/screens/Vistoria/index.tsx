@@ -1,13 +1,16 @@
 import { BackButton } from "@/components/back-button";
 import { Button } from "@/components/form/button";
 import { RootStackParams } from "@/routes/tab-routes";
-import { orders } from "@/utils/constants/orders";
-import { useNavigation } from "@react-navigation/native";
+import { RouteProp, useNavigation, useRoute } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { useEffect, useState } from "react";
 import * as C from "./styles";
 
+export type VistoriaRouteProp = RouteProp<RootStackParams, "vistoria">;
+
 export default function Vistoria() {
+	const route = useRoute<VistoriaRouteProp>();
+	const { orderData } = route.params;
 	const navigation =
 		useNavigation<NativeStackNavigationProp<RootStackParams>>();
 
@@ -20,13 +23,13 @@ export default function Vistoria() {
 	]);
 
 	useEffect(() => {
-		if (orders?.clienteDTO.endereco) {
-			const parts = orders.clienteDTO.endereco
+		if (orderData?.clienteDTO.endereco) {
+			const parts = orderData.clienteDTO.endereco
 				.split(", ")
 				.map((part) => part.trim());
 			setEnderecoArray(parts);
 		}
-	}, [orders]);
+	}, [orderData]);
 
 	return (
 		<C.Container
@@ -38,7 +41,7 @@ export default function Vistoria() {
 			<C.Main>
 				<C.FakeInput>
 					<C.Label>E-mail</C.Label>
-					<C.Value>{orders.clienteDTO.email}</C.Value>
+					<C.Value>{orderData.clienteDTO.email}</C.Value>
 				</C.FakeInput>
 				<C.Row>
 					<C.FakeInput>
@@ -66,15 +69,15 @@ export default function Vistoria() {
 				</C.Row>
 				<C.FakeInput>
 					<C.Label>Tipo de Instalação</C.Label>
-					<C.Value>{orders.tipoInstalacao}</C.Value>
+					<C.Value>{orderData.tipoInstalacao}</C.Value>
 				</C.FakeInput>
 				<C.FakeInput>
 					<C.Label>Soluções</C.Label>
-					<C.Value>{orders.solucoes}</C.Value>
+					<C.Value>{orderData.solucoes}</C.Value>
 				</C.FakeInput>
 				<C.FakeInput>
 					<C.Label>Pretende instalar em</C.Label>
-					<C.Value>{orders.pretendeInstalarEm}</C.Value>
+					<C.Value>{orderData.pretendeInstalarEm}</C.Value>
 				</C.FakeInput>
 				<C.FakeInput>
 					<C.Label>Concessionárias</C.Label>
@@ -82,17 +85,50 @@ export default function Vistoria() {
 				</C.FakeInput>
 				<C.FakeInput>
 					<C.Label>Custo da conta de luz</C.Label>
-					<C.Value>{orders.valorContaLuz}</C.Value>
+					<C.Value>{orderData.valorContaLuz}</C.Value>
 				</C.FakeInput>
 				<C.FakeInput>
 					<C.Label>Comentários</C.Label>
-					<C.Value>{orders.comentarios}</C.Value>
+					<C.Value>{orderData.comentarios}</C.Value>
 				</C.FakeInput>
 			</C.Main>
 			<C.ButtonArea>
-				<Button onPress={() => navigation.navigate("padraoEntradaForm")}>
-					Criar Relatório
-				</Button>
+				{orderData.solucoes === "Aquecedor Banho" && (
+					<Button
+						onPress={() =>
+							navigation.navigate("banho", { orderData: orderData })
+						}
+					>
+						Criar Relatório
+					</Button>
+				)}
+				{orderData.solucoes === "Aquecedor Piscina" && (
+					<Button
+						onPress={() =>
+							navigation.navigate("piscina", { orderData: orderData })
+						}
+					>
+						Criar Relatório
+					</Button>
+				)}
+				{orderData.solucoes === "Fotovoltaico Comercial" && (
+					<Button
+						onPress={() =>
+							navigation.navigate("padraoEntradaForm", { orderData: orderData })
+						}
+					>
+						Criar Relatório
+					</Button>
+				)}
+				{orderData.solucoes === "Fotovoltaico Residencial" && (
+					<Button
+						onPress={() =>
+							navigation.navigate("padraoEntradaForm", { orderData: orderData })
+						}
+					>
+						Criar Relatório
+					</Button>
+				)}
 			</C.ButtonArea>
 		</C.Container>
 	);

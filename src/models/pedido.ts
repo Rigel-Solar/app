@@ -35,7 +35,11 @@ export interface PedidoTS {
 	idTecnico: number;
 	idCliente: number;
 	tipoInstalacao: string;
-	solucoes: string;
+	solucoes:
+		| "Fotovoltaico Residencial"
+		| "Fotovoltaico Comercial"
+		| "Aquecedor Banho"
+		| "Aquecedor Piscina";
 	pretendeInstalarEm: string;
 	valorContaLuz: number;
 	comentarios: string;

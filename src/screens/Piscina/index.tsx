@@ -2,18 +2,22 @@ import { Button } from "@/components/form/button";
 import { FormFieldsContainer } from "@/components/form/form";
 import { Input } from "@/components/form/input";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks/useApp";
-import { setBanho } from "@/redux/reducers/banho-reducer";
-import { PiscinaTS } from "@/redux/reducers/piscina-reducer";
+import { PiscinaTS, setPiscina } from "@/redux/reducers/piscina-reducer";
 import { RootStackParams } from "@/routes/tab-routes";
 import { piscinaSchema } from "@/utils/schemas/schema-piscina";
+import { useMutationQuery } from "@/utils/services/hooks/useMutationQuery";
 import { Ionicons } from "@expo/vector-icons";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
+import { Alert } from "react-native";
+import { VistoriaRouteProp } from "../Vistoria";
 import * as C from "./styles";
 
 export default function Piscina() {
+	const route = useRoute<VistoriaRouteProp>();
+	const { orderData } = route.params;
 	const dispatch = useAppDispatch();
 	const piscina = useAppSelector((state) => state.piscina.piscina);
 	const navigation =
@@ -28,10 +32,31 @@ export default function Piscina() {
 		defaultValues: piscina,
 	});
 
+	const {
+		mutate: onCreate,
+		isLoading,
+		isError,
+	} = useMutationQuery(`/FichaPiscina`, "post");
+
 	const onSubmit: SubmitHandler<PiscinaTS> = async (formData: PiscinaTS) => {
-		dispatch(setBanho(formData));
-		console.log(formData);
-		navigation.goBack();
+		formData.idVistoria = orderData.id;
+		console.log(JSON.stringify(formData));
+		onCreate(formData, {
+			onSuccess: () => {
+				Alert.alert("Relatório criado!");
+				dispatch(setPiscina({}));
+				navigation.goBack();
+			},
+			onError: (error) => {
+				Alert.alert(
+					"Não foi possível enviar",
+					"Sua requisição não foi enviada, mas salvamos seu relatório!"
+				);
+				dispatch(setPiscina(formData));
+				console.log("Erro", error);
+				navigation.goBack();
+			},
+		});
 	};
 
 	return (
@@ -120,7 +145,24 @@ export default function Piscina() {
 							<Input.Root>
 								<Input.Input
 									value={value?.toString() || ""}
-									placeholderText="Quantidade em metros. ex.: 3"
+									placeholderText="ex.: Sim"
+									onChange={onChange}
+								/>
+								<Input.ErrorText ErrorText={errors.usoCapaTermica?.message} />
+							</Input.Root>
+						)}
+					/>
+				</FormFieldsContainer>
+				<FormFieldsContainer>
+					<C.Label>Região (1-Quente, 2-Fria, 3- Média)</C.Label>
+					<Controller
+						control={control}
+						name="regiao"
+						render={({ field: { onChange, value } }) => (
+							<Input.Root>
+								<Input.Input
+									value={value?.toString() || ""}
+									placeholderText="ex.: 3"
 									onChange={onChange}
 								/>
 								<Input.ErrorText ErrorText={errors.usoCapaTermica?.message} />
@@ -137,7 +179,7 @@ export default function Piscina() {
 							<Input.Root>
 								<Input.Input
 									value={value?.toString() || ""}
-									placeholderText="Quantidade em metros. ex.: 3"
+									placeholderText="ex.: Ab/Fech"
 									onChange={onChange}
 								/>
 								<Input.ErrorText ErrorText={errors.ambiente?.message} />
@@ -145,7 +187,7 @@ export default function Piscina() {
 						)}
 					/>
 				</FormFieldsContainer>
-				<FormFieldsContainer>
+				{/* <FormFieldsContainer>
 					<C.Label>Área</C.Label>
 					<Controller
 						control={control}
@@ -178,7 +220,7 @@ export default function Piscina() {
 							</Input.Root>
 						)}
 					/>
-				</FormFieldsContainer>
+				</FormFieldsContainer> */}
 			</C.Form>
 
 			<C.ButtonArea>

@@ -14,10 +14,10 @@ export type BanhoTS = {
 	neighborhood: string;
 	type: string;
 	cellphone: string;
-	BaseCaixa?: number;
-	BaseBoiler?: number;
-	DistanciaBoiler?: number;
-	RegistroCaixa?: number;
-	RegistroBarrilete?: number;
-	DisjuntorBipolar?: number;
+	baseCaixa?: number;
+	baseBoiler?: number;
+	distanciaBoiler?: number;
+	registroCaixa?: number;
+	registroBarrilete?: number;
+	disjuntorBipolar?: number;
 };

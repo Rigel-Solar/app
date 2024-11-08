@@ -4,13 +4,14 @@ import { Input } from "@/components/form/input";
 import { useAppDispatch } from "@/redux/hooks/useApp";
 import { updateSolo } from "@/redux/reducers/fotovoltaico-reducer";
 import { RootStackParams } from "@/routes/tab-routes";
+import { VistoriaRouteProp } from "@/screens/Vistoria";
 import {
 	fotovoltaicoSchema,
 	FotovoltaicoTS,
 } from "@/utils/schemas/schema-fotovoltaico";
 import { Ionicons } from "@expo/vector-icons";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import React from "react";
 import { Controller, useForm } from "react-hook-form";
@@ -23,6 +24,8 @@ interface SoloFormProps {
 }
 
 const SoloFormScreen = () => {
+	const route = useRoute<VistoriaRouteProp>();
+	const { orderData } = route.params;
 	const dispatch = useAppDispatch();
 	const navigation =
 		useNavigation<NativeStackNavigationProp<RootStackParams>>();
@@ -36,7 +39,7 @@ const SoloFormScreen = () => {
 
 	const onSubmit = (formData: FotovoltaicoTS) => {
 		dispatch(updateSolo(formData));
-		navigation.navigate("telhadoForm");
+		navigation.navigate("telhadoForm", { orderData: orderData });
 	};
 
 	return (

@@ -6,12 +6,13 @@ export type BanhoTS = {
 	_orderId?: string;
 	client?: Client;
 	imgUrl?: string[];
-	BaseCaixa?: number;
-	BaseBoiler?: number;
-	DistanciaBoiler?: number;
-	RegistroCaixa?: number;
-	RegistroBarrilete?: number;
-	DisjuntorBipolar?: number;
+	baseCaixa?: number;
+	baseBoiler?: number;
+	distanciaBoiler?: number;
+	registroCaixa?: number;
+	registroBarrilete?: number;
+	disjuntorBipolar?: number;
+	idVistoria?: number;
 };
 
 type State = {
@@ -20,12 +21,13 @@ type State = {
 
 const initialState: State = {
 	banho: {
-		BaseCaixa: 0,
-		BaseBoiler: 0,
-		DistanciaBoiler: 0,
-		RegistroCaixa: 0,
-		RegistroBarrilete: 0,
-		DisjuntorBipolar: 0
+		baseCaixa: 0,
+		baseBoiler: 0,
+		distanciaBoiler: 0,
+		registroCaixa: 0,
+		registroBarrilete: 0,
+		disjuntorBipolar: 0,
+		idVistoria: 0,
 	},
 };
 
@@ -35,6 +37,9 @@ export const slice = createSlice({
 	reducers: {
 		setBanho: (state, action) => {
 			state.banho = action.payload;
+		},
+		removeBanho: (state, action) => {
+			state.banho = {};
 		},
 	},
 });

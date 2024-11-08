@@ -1,18 +1,16 @@
 import styled from "styled-components/native";
 
-export const Container = styled.ScrollView`
+export const Container = styled.View`
 	flex: 1;
 	padding: 20px;
 	background-color: ${({ theme }) => theme.colors.brand.background};
 `;
 
-export const Header = styled.View`
-	flex: 1;
-`;
+export const Header = styled.View``;
 
-export const Main = styled.ScrollView`
+export const Main = styled.View`
 	flex: 1;
-	padding: 24px 0 80px 0;
+	padding: 24px 0 24px 0;
 `;
 
 export const TitleArea = styled.View`
