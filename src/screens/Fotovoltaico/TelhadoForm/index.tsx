@@ -16,7 +16,7 @@ import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import React from "react";
 import { Controller, useForm } from "react-hook-form";
 import { ScrollView, View } from "react-native";
-import { ButtonArea, Label } from "../styles";
+import { ButtonArea, Label, Form } from "../styles";
 
 interface TelhadoFormProps {
 	control: any;
@@ -42,7 +42,7 @@ const TelhadoFormScreen = () => {
 	};
 
 	return (
-		<ScrollView
+		<Form
 			contentContainerStyle={{
 				flexGrow: 1,
 			}}
@@ -72,7 +72,7 @@ const TelhadoFormScreen = () => {
 					</Button>
 				</ButtonArea>
 			</View>
-		</ScrollView>
+		</Form>
 	);
 };
 

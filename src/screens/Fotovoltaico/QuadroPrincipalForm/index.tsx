@@ -15,8 +15,8 @@ import { useNavigation, useRoute } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import React from "react";
 import { Controller, useForm } from "react-hook-form";
-import { ScrollView, View } from "react-native";
-import { ButtonArea, Label } from "../styles";
+import { View } from "react-native";
+import { ButtonArea, Form, Label } from "../styles";
 
 interface QuadroPrincipalFormProps {
 	control: any;
@@ -43,7 +43,7 @@ const QuadroPrincipalFormScreen = () => {
 	};
 
 	return (
-		<ScrollView
+		<Form
 			contentContainerStyle={{
 				flexGrow: 1,
 			}}
@@ -73,7 +73,7 @@ const QuadroPrincipalFormScreen = () => {
 					</Button>
 				</ButtonArea>
 			</View>
-		</ScrollView>
+		</Form>
 	);
 };
 

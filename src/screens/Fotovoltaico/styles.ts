@@ -8,6 +8,7 @@ export const Container = styled.KeyboardAvoidingView`
 
 export const Form = styled.ScrollView`
 	flex: 1;
+	background-color: ${({ theme }) => theme.colors.brand.background};
 `;
 
 export const Label = styled.Text`

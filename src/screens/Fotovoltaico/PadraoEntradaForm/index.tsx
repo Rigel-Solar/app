@@ -8,7 +8,7 @@ import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import React from "react";
 import { Controller } from "react-hook-form";
 import { View } from "react-native";
-import { ButtonArea, Label } from "../styles";
+import { ButtonArea, Form, Label } from "../styles";
 
 interface PadraoEntradaFormProps {
 	control: any;
@@ -46,7 +46,7 @@ const PadraoEntradaFormScreen = () => {
 	};
 
 	return (
-		<ScrollView
+		<Form
 			contentContainerStyle={{
 				flexGrow: 1,
 			}}
@@ -76,7 +76,7 @@ const PadraoEntradaFormScreen = () => {
 					</Button>
 				</ButtonArea>
 			</View>
-		</ScrollView>
+		</Form>
 	);
 };
 

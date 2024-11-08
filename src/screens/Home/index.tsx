@@ -29,7 +29,7 @@ export default function Home() {
 			<C.Header>
 				<C.TitleArea>
 					<C.Title>Pedidos</C.Title>
-					<C.Description>Total 7 Pedidos</C.Description>
+					<C.Description>Total {pedidos.length} Pedidos</C.Description>
 				</C.TitleArea>
 			</C.Header>
 			<C.Main>

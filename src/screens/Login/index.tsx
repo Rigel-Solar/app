@@ -1,6 +1,6 @@
 import { Input } from "@/components/form/input";
 import { useAppDispatch } from "@/redux/hooks/useApp";
-import { addToken, LoginTS } from "@/redux/reducers/user-reducer";
+import { addToken, addUser, LoginTS } from "@/redux/reducers/user-reducer";
 import { loginSchema } from "@/utils/schemas/schema-login";
 import { useMutationQuery } from "@/utils/services/hooks/useMutationQuery";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -26,9 +26,10 @@ export default function Login() {
 	} = useMutationQuery(`/Auth/`, "post");
 
 	const onSubmit: SubmitHandler<LoginTS> = async (formData: LoginTS) => {
-		console.log(formData)
+		console.log(formData);
 		onLogin(formData, {
 			onSuccess: (response) => {
+				dispatch(addUser(formData.email));
 				dispatch(addToken(response.data.token));
 			},
 			onError: (error) => {

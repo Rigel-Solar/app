@@ -6,7 +6,7 @@ export type LoginTS = {
 };
 
 type UserState = {
-	user: LoginTS | null;
+	user: string | null;
 	token: string | null;
 };
 
@@ -19,7 +19,7 @@ const slice = createSlice({
 	name: "user",
 	initialState,
 	reducers: {
-		addUser: (state, action: PayloadAction<LoginTS>) => {
+		addUser: (state, action: PayloadAction<string>) => {
 			state.user = action.payload;
 		},
 		addToken: (state, action: PayloadAction<string>) => {

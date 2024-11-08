@@ -10,7 +10,9 @@ import * as C from "./styles";
 
 export default function Config() {
 	const dispatch = useAppDispatch();
+	const user = useAppSelector((state) => state.user);
 	const theme = useAppSelector((state) => state.theme);
+	console.log(user);
 
 	const handleModeToggle = () => {
 		dispatch(setThemeStatus(theme.status === "dark" ? "light" : "dark"));
@@ -31,8 +33,9 @@ export default function Config() {
 			<C.Main>
 				<C.ProfileArea>
 					<User />
-					<C.Name>John Doe</C.Name>
-					<C.Email>johndoe@gmail.com</C.Email>
+					{/* <C.Name>John Doe</C.Name> */}
+					<C.Name />
+					<C.Email>{user.user}</C.Email>
 				</C.ProfileArea>
 
 				<C.Category>Contéudo</C.Category>

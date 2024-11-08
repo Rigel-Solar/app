@@ -16,7 +16,7 @@ import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import React from "react";
 import { Controller, useForm } from "react-hook-form";
 import { ScrollView, View } from "react-native";
-import { ButtonArea, Label } from "../styles";
+import { ButtonArea, Form, Label } from "../styles";
 
 interface SoloFormProps {
 	control: any;
@@ -43,7 +43,7 @@ const SoloFormScreen = () => {
 	};
 
 	return (
-		<ScrollView
+		<Form
 			contentContainerStyle={{
 				flexGrow: 1,
 			}}
@@ -73,7 +73,7 @@ const SoloFormScreen = () => {
 					</Button>
 				</ButtonArea>
 			</View>
-		</ScrollView>
+		</Form>
 	);
 };
 
