@@ -10,7 +10,7 @@ import * as C from "./styles";
 
 export default function Config() {
 	const dispatch = useAppDispatch();
-	const user = useAppSelector((state) => state.user);
+	const user = useAppSelector((state) => state.user.user);
 	const theme = useAppSelector((state) => state.theme);
 	console.log(user);
 
@@ -35,7 +35,7 @@ export default function Config() {
 					<User />
 					{/* <C.Name>John Doe</C.Name> */}
 					<C.Name />
-					<C.Email>{user.user}</C.Email>
+					<C.Email>{user}</C.Email>
 				</C.ProfileArea>
 
 				<C.Category>Contéudo</C.Category>

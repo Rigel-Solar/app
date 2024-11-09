@@ -36,7 +36,7 @@ export const orders: PedidoTS = {
 	idTecnico: 20,
 	idCliente: 30,
 	tipoInstalacao: "Fotovoltaica",
-	solucoes: "Instalação de painéis solares e aquecimento de água",
+	solucoes: "Aquecedor Banho",
 	pretendeInstalarEm: "3 meses",
 	valorContaLuz: 350,
 	comentarios: "Cliente interessado em reduzir custo com energia elétrica.",

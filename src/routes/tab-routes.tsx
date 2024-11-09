@@ -1,5 +1,6 @@
 import { PedidoTS } from "@/models/pedido";
-import { useAppSelector } from "@/redux/hooks/useApp";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks/useApp";
+import { addToken } from "@/redux/reducers/user-reducer";
 import Banho from "@/screens/Banho";
 import Config from "@/screens/Config";
 import InstalacaoModuloFormScreen from "@/screens/Fotovoltaico/InstalacaoModuloForm";
@@ -15,6 +16,7 @@ import { AntDesign, Octicons } from "@expo/vector-icons";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { useEffect } from "react";
 
 export type RootStackParams = {
 	bottomBar: undefined;
@@ -82,7 +84,7 @@ export function AppRoutes() {
 		<NavigationContainer independent>
 			<Stack.Navigator screenOptions={{ headerShown: false }}>
 				<>
-					{user.token ? (
+					{user.token !== null ? (
 						<>
 							<Stack.Screen
 								name="bottomBar"

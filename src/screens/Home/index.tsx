@@ -32,9 +32,8 @@ export default function Home() {
 					<C.Description>Total {pedidos.length} Pedidos</C.Description>
 				</C.TitleArea>
 			</C.Header>
-			<C.Main>
 				<FlatList
-					showsHorizontalScrollIndicator={false}
+					showsVerticalScrollIndicator={false}
 					contentContainerStyle={{ gap: 12 }}
 					keyExtractor={(pedido) => pedido.id.toString()}
 					data={pedidos}
@@ -47,7 +46,6 @@ export default function Home() {
 						/>
 					)}
 				/>
-			</C.Main>
 		</C.Container>
 	);
 }

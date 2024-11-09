@@ -6,11 +6,13 @@ export const Container = styled.View`
 	background-color: ${({ theme }) => theme.colors.brand.background};
 `;
 
-export const Header = styled.View``;
+export const Header = styled.View`
+	margin-bottom: 24px;
+`;
 
 export const Main = styled.View`
 	flex: 1;
-	padding: 24px 0 24px 0;
+	margin: 24px 0 12px 0;
 `;
 
 export const TitleArea = styled.View`
