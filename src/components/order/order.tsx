@@ -3,7 +3,6 @@ import { useAppSelector } from "@/redux/hooks/useApp";
 import Entypo from "@expo/vector-icons/Entypo";
 import { useEffect, useState } from "react";
 import { TouchableOpacityProps } from "react-native";
-import { Badge } from "../badge/badge";
 import * as C from "./styles";
 
 interface OrderTS extends TouchableOpacityProps {
@@ -20,9 +19,11 @@ export function Order({ data, ...props }: OrderTS) {
 	]);
 	const theme = useAppSelector((state) => state.theme);
 
+	console.log(data);
+
 	useEffect(() => {
-		if (data?.clienteDTO.endereco) {
-			const parts = data.clienteDTO.endereco
+		if (data?.idClienteNavigation.endereco) {
+			const parts = data.idClienteNavigation.endereco
 				.split(", ")
 				.map((part) => part.trim());
 			setEnderecoArray(parts);
@@ -41,7 +42,7 @@ export function Order({ data, ...props }: OrderTS) {
 				<C.Text>{enderecoArray[0]} - SP</C.Text>
 			</C.Description>
 			<C.Footer>
-				<C.Text>{data.clienteDTO.nome}</C.Text>
+				<C.Text>{data.idClienteNavigation.nome ? data.idClienteNavigation.nome : "Sem nome"}</C.Text>
 				<Entypo
 					name="chevron-thin-right"
 					size={16}

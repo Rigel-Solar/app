@@ -38,6 +38,7 @@ const QuadroPrincipalFormScreen = () => {
 	});
 
 	const onSubmit = (formData: FotovoltaicoTS) => {
+		console.log("Aqui 2: ", formData);
 		dispatch(updateQuadroPrincipal(formData));
 		navigation.navigate("soloForm", { orderData: orderData });
 	};

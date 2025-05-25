@@ -11,7 +11,7 @@ export const orders: PedidoTS = {
 		{ modelo: "Painel B", capacidade: 400 },
 	],
 	fichaPiscinas: [{ volume: 5000, tipo: "aquecimento solar" }],
-	clienteDTO: {
+	idClienteNavigation: {
 		tipo: "residencial",
 		nome: "João Silva",
 		email: "joao.silva@email.com",
@@ -24,7 +24,7 @@ export const orders: PedidoTS = {
 		idUsuario: 101,
 		idUsuarioNavigation: null,
 	},
-	tecnicoDTO: {
+	idTecnicoNavigation: {
 		crea: "123456-SP",
 		usuario: {
 			nome: "Carlos Oliveira",

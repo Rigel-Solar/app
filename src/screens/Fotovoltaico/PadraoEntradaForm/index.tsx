@@ -24,7 +24,6 @@ import {
 } from "@/utils/schemas/schema-fotovoltaico";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
-import { ScrollView } from "react-native";
 
 const PadraoEntradaFormScreen = () => {
 	const route = useRoute<VistoriaRouteProp>();
@@ -41,6 +40,7 @@ const PadraoEntradaFormScreen = () => {
 	});
 
 	const onSubmit = (formData: FotovoltaicoTS) => {
+		console.log("Aqui 2: ", formData)
 		dispatch(updatePadraoEntrada(formData));
 		navigation.navigate("quadroPrincipalForm", { orderData: orderData });
 	};
@@ -109,15 +109,15 @@ const PadraoEntradaForm = ({ control, errors }: PadraoEntradaFormProps) => {
 				<Label>Tipo de Cliente</Label>
 				<Controller
 					control={control}
-					name="tipoClienteDTO"
+					name="tipoidClienteNavigation"
 					render={({ field: { onChange, value } }) => (
 						<Input.Root>
 							<Input.Input
-								value={value?.tipo || ""}
+								value={value || ""}
 								placeholderText="ex.: Residencial, Comercial"
 								onChange={(newValue) => onChange({ tipo: newValue })}
 							/>
-							<Input.ErrorText ErrorText={errors.tipoClienteDTO?.message} />
+							<Input.ErrorText ErrorText={errors.tipoidClienteNavigation?.message} />
 						</Input.Root>
 					)}
 				/>
@@ -149,7 +149,7 @@ const PadraoEntradaForm = ({ control, errors }: PadraoEntradaFormProps) => {
 					render={({ field: { onChange, value } }) => (
 						<Input.Root>
 							<Input.Input
-								value={value?.tipo || ""}
+								value={value || ""}
 								placeholderText="ex.: Monofásica, Bifásica, Trifásica"
 								onChange={(newValue) => onChange({ tipo: newValue })}
 							/>
@@ -167,7 +167,7 @@ const PadraoEntradaForm = ({ control, errors }: PadraoEntradaFormProps) => {
 					render={({ field: { onChange, value } }) => (
 						<Input.Root>
 							<Input.Input
-								value={value?.tensao || ""}
+								value={value || ""}
 								placeholderText="ex.: 220V, 380V"
 								onChange={(newValue) => onChange({ tensao: newValue })}
 							/>
@@ -185,7 +185,7 @@ const PadraoEntradaForm = ({ control, errors }: PadraoEntradaFormProps) => {
 					render={({ field: { onChange, value } }) => (
 						<Input.Root>
 							<Input.Input
-								value={value?.condicao || ""}
+								value={value || ""}
 								placeholderText="ex.: Bom, Regular, Ruim"
 								onChange={(newValue) => onChange({ condicao: newValue })}
 							/>
@@ -225,7 +225,7 @@ const PadraoEntradaForm = ({ control, errors }: PadraoEntradaFormProps) => {
 					render={({ field: { onChange, value } }) => (
 						<Input.Root>
 							<Input.Input
-								value={value?.modelo || ""}
+								value={value || ""}
 								placeholderText="ex.: ABC123"
 								onChange={(newValue) => onChange({ modelo: newValue })}
 							/>

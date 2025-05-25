@@ -23,8 +23,8 @@ export default function Vistoria() {
 	]);
 
 	useEffect(() => {
-		if (orderData?.clienteDTO.endereco) {
-			const parts = orderData.clienteDTO.endereco
+		if (orderData?.idClienteNavigation.endereco) {
+			const parts = orderData.idClienteNavigation.endereco
 				.split(", ")
 				.map((part) => part.trim());
 			setEnderecoArray(parts);
@@ -41,7 +41,7 @@ export default function Vistoria() {
 			<C.Main>
 				<C.FakeInput>
 					<C.Label>E-mail</C.Label>
-					<C.Value>{orderData.clienteDTO.email}</C.Value>
+					<C.Value>{orderData.idClienteNavigation.email}</C.Value>
 				</C.FakeInput>
 				<C.Row>
 					<C.FakeInput>
