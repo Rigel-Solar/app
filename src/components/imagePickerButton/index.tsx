@@ -29,9 +29,9 @@ export const ImagePickerButton: React.FC<ImagePickerButtonProps> = ({
   const handleSelectImage = async () => {
     try {
       const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
-      
+     
       if (status !== ImagePicker.PermissionStatus.GRANTED) {
-        return Alert.alert('Permissão necessária', 
+        return Alert.alert('Permissão necessária',
           'É necessário conceder permissão para acessar seu álbum!');
       }
 
@@ -45,26 +45,38 @@ export const ImagePickerButton: React.FC<ImagePickerButtonProps> = ({
       if (response.canceled) return;
 
       if (response.assets && response.assets.length > 0) {
-        const asset = response.assets[0];
+        // Processar múltiplas imagens se allowMultiple for true
+        for (const asset of response.assets) {
+          const imgManipulated = await ImageManipulator.manipulateAsync(
+            asset.uri,
+            [{ resize: { width: resizeWidth } }],
+            {
+              compress: 0.8, // Reduzir um pouco a qualidade para economizar espaço
+              format: ImageManipulator.SaveFormat.JPEG,
+              base64: false,
+            }
+          );
 
-        const imgManipulated = await ImageManipulator.manipulateAsync(
-          asset.uri,
-          [{ resize: { width: resizeWidth } }],
-          {
-            compress: 1,
-            format: ImageManipulator.SaveFormat.JPEG,
-            base64: false,
+          // Extrair extensão do arquivo de forma mais robusta
+          const uriParts = imgManipulated.uri.split('.');
+          const fileExtension = uriParts[uriParts.length - 1] || 'jpg';
+          
+          const file = {
+            uri: imgManipulated.uri,
+            name: `image_${Date.now()}_${Math.random().toString(36).substr(2, 9)}.${fileExtension}`,
+            type: `image/${fileExtension}`,
+          };
+
+          console.log('Arquivo processado:', file);
+          
+          // Atualizar estado local apenas com a primeira imagem para feedback visual
+          if (asset === response.assets[0]) {
+            setSelectedImageUri(imgManipulated.uri);
           }
-        );
-
-        const file = {
-          uri: imgManipulated.uri,
-          name: `image_${Date.now()}.jpg`,
-          type: 'image/jpeg',
-        };
-
-        setSelectedImageUri(imgManipulated.uri);
-        onImageSelect?.(file);
+          
+          // Chamar callback para cada imagem selecionada
+          onImageSelect?.(file);
+        }
       }
     } catch (error) {
       console.error('Erro ao selecionar imagem:', error);
@@ -73,7 +85,7 @@ export const ImagePickerButton: React.FC<ImagePickerButtonProps> = ({
   };
 
   return (
-    <TouchableOpacity 
+    <TouchableOpacity
       onPress={handleSelectImage}
       style={[styles.button, buttonStyle]}
     >

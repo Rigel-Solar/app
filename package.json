@@ -30,7 +30,8 @@
     "styled-components": "^6.1.8",
     "yup": "^1.4.0",
     "expo-image-picker": "~15.1.0",
-    "expo-image-manipulator": "~12.0.5"
+    "expo-image-manipulator": "~12.0.5",
+    "expo-file-system": "~17.0.1"
   },
   "devDependencies": {
     "@babel/core": "^7.24.0",
