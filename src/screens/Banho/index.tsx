@@ -6,6 +6,7 @@ import { useAppDispatch, useAppSelector } from '@/redux/hooks/useApp';
 import { setBanho } from '@/redux/reducers/banho-reducer';
 import { RootStackParams } from '@/routes/tab-routes';
 import { BanhoTS, banhoSchema } from '@/utils/schemas/schema-banho';
+import { api } from '@/utils/services/api';
 import { useMutationQuery } from '@/utils/services/hooks/useMutationQuery';
 import { Ionicons } from '@expo/vector-icons';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -18,13 +19,13 @@ import { VistoriaRouteProp } from '../Vistoria';
 import * as C from './styles';
 
 interface PhotosData {
-	fotos: string;
-	codigoFicha: number;
-	tipoFicha: number;
+	Fotos: Array<{ uri: string; name: string; type: string }>;
+	CodigoFicha: number;
+	TipoFicha: number;
 }
 
 export default function Banho() {
-	const [selectedPhotos, setSelectedPhotos] = useState<string[]>([]);
+	const [selectedPhotos, setSelectedPhotos] = useState<{ uri: string; name: string; type: string }[]>([]);
 	const route = useRoute<VistoriaRouteProp>();
 	const { orderData } = route.params;
 	const dispatch = useAppDispatch();
@@ -47,43 +48,62 @@ export default function Banho() {
 	);
 	const { mutate: onCreatePhotos } = useMutationQuery(`/Foto`, 'post');
 
-	const handlePhotoSelect = (base64: string) => {
-		setSelectedPhotos((prev) => [...prev, base64]);
+	const handlePhotoSelect = (file: { uri: string; name: string; type: string }) => {
+		setSelectedPhotos((prev) => [...prev, file]);
+	};
+
+	const uploadPhotos = async (photosData: PhotosData) => {
+		const formData = new FormData();
+
+		photosData.Fotos.forEach((photo, index) => {
+			formData.append('Fotos', {
+				uri: photo.uri,
+				name: photo.name,
+				type: photo.type,
+			} as any);
+		});
+
+		formData.append('CodigoFicha', photosData.CodigoFicha.toString());
+		formData.append('TipoFicha', photosData.TipoFicha.toString());
+
+		return api.post('/Foto', formData, {
+			headers: {
+				'Content-Type': 'multipart/form-data',
+			},
+		});
 	};
 
 	const onSubmit: SubmitHandler<BanhoTS> = async (formData: BanhoTS) => {
 		formData.idVistoria = orderData.id;
 
 		onCreate(formData, {
-			onSuccess: (response) => {
-				const fichaId = response.data;
-				console.log(fichaId);
+			onSuccess: async (response) => {
+				console.log("response:", response)
 
 				if (selectedPhotos.length > 0) {
 					const photosData: PhotosData = {
-						fotos: selectedPhotos[0],
-						codigoFicha: fichaId,
-						tipoFicha: 3,
-				};
+						Fotos: selectedPhotos,
+						CodigoFicha: orderData.id,
+						TipoFicha: 3,
+					};
 
-				console.log(photosData);
+					console.log(selectedPhotos);
+					console.log(photosData);
 
-					onCreatePhotos(photosData, {
-						onSuccess: () => {
-							Alert.alert('Relatório e fotos enviados com sucesso!');
-							dispatch(setBanho({}));
-							navigation.goBack();
-						},
-						onError: (error) => {
-							console.error('Erro ao enviar fotos:', error);
-							Alert.alert(
-								'Parcialmente enviado',
-								'O relatório foi salvo, mas houve um erro ao enviar as fotos.'
-							);
-							dispatch(setBanho(formData));
-							navigation.goBack();
-						},
-					});
+					try {
+						await uploadPhotos(photosData);
+						Alert.alert('Relatório e fotos enviados com sucesso!');
+						dispatch(setBanho({}));
+						navigation.goBack();
+					} catch (error) {
+						console.error('Erro ao enviar fotos:', error);
+						Alert.alert(
+							'Parcialmente enviado',
+							'O relatório foi salvo, mas houve um erro ao enviar as fotos.'
+						);
+						dispatch(setBanho(formData));
+						navigation.goBack();
+					}
 				} else {
 					Alert.alert('Relatório criado!');
 					dispatch(setBanho({}));
@@ -166,7 +186,7 @@ export default function Banho() {
 				</FormFieldsContainer>
 				<FormFieldsContainer>
 					<C.Label>
-						Registro de 1” na saída da caixa d´água, exclusivo para alimentação
+						Registro de 1" na saída da caixa d´água, exclusivo para alimentação
 						do Boiler
 					</C.Label>
 					<Controller

@@ -1,6 +1,7 @@
 import { Button } from "@/components/form/button";
 import { FormFieldsContainer } from "@/components/form/form";
 import { Input } from "@/components/form/input";
+import { ImagePickerButton } from "@/components/imagePickerButton";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks/useApp";
 import { PiscinaTS, setPiscina } from "@/redux/reducers/piscina-reducer";
 import { RootStackParams } from "@/routes/tab-routes";
@@ -14,8 +15,17 @@ import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { Alert } from "react-native";
 import { VistoriaRouteProp } from "../Vistoria";
 import * as C from "./styles";
+import { useState } from "react";
+
+interface PhotosData {
+	Fotos: Array<{ uri: string; name: string; type: string }>;
+	CodigoFicha: number;
+	TipoFicha: number;
+}
+
 
 export default function Piscina() {
+	const [selectedPhotos, setSelectedPhotos] = useState<{ uri: string; name: string; type: string }[]>([]);
 	const route = useRoute<VistoriaRouteProp>();
 	const { orderData } = route.params;
 	const dispatch = useAppDispatch();
@@ -38,26 +48,70 @@ export default function Piscina() {
 		isError,
 	} = useMutationQuery(`/FichaPiscina`, "post");
 
+	const handlePhotoSelect = (file: { uri: string; name: string; type: string }) => {
+		setSelectedPhotos((prev) => [...prev, file]);
+	};
+
+	const uploadPhotos = async (photosData: PhotosData) => {
+		const formData = new FormData();
+
+		photosData.Fotos.forEach((photo, index) => {
+			formData.append('Fotos', {
+				uri: photo.uri,
+				name: photo.name,
+				type: photo.type,
+			} as any);
+		});
+	}
+
 	const onSubmit: SubmitHandler<PiscinaTS> = async (formData: PiscinaTS) => {
 		formData.idVistoria = orderData.id;
-		console.log(JSON.stringify(formData));
+
 		onCreate(formData, {
-			onSuccess: () => {
-				Alert.alert("Relatório criado!");
-				dispatch(setPiscina({}));
-				navigation.goBack();
+			onSuccess: async (response) => {
+				console.log("response:", response)
+
+				if (selectedPhotos.length > 0) {
+					const photosData: PhotosData = {
+						Fotos: selectedPhotos,
+						CodigoFicha: orderData.id,
+						TipoFicha: 3,
+					};
+
+					console.log(selectedPhotos);
+					console.log(photosData);
+
+					try {
+						await uploadPhotos(photosData);
+						Alert.alert('Relatório e fotos enviados com sucesso!');
+						dispatch(setPiscina({}));
+						navigation.goBack();
+					} catch (error) {
+						console.error('Erro ao enviar fotos:', error);
+						Alert.alert(
+							'Parcialmente enviado',
+							'O relatório foi salvo, mas houve um erro ao enviar as fotos.'
+						);
+						dispatch(setPiscina(formData));
+						navigation.goBack();
+					}
+				} else {
+					Alert.alert('Relatório criado!');
+					dispatch(setPiscina({}));
+					navigation.goBack();
+				}
 			},
 			onError: (error) => {
 				Alert.alert(
-					"Não foi possível enviar",
-					"Sua requisição não foi enviada, mas salvamos seu relatório!"
+					'Não foi possível enviar',
+					'Sua requisição não foi enviada, mas salvamos seu relatório!'
 				);
 				dispatch(setPiscina(formData));
-				console.log("Erro", error);
+				console.log('Erro', error);
 				navigation.goBack();
 			},
 		});
-	};
+	}
 
 	return (
 		<C.Container>
@@ -221,8 +275,23 @@ export default function Piscina() {
 						)}
 					/>
 				</FormFieldsContainer> */}
+				<FormFieldsContainer>
+					<C.Label>Fotos do local</C.Label>
+					<ImagePickerButton
+						selectText={`Selecionar fotos ${selectedPhotos.length > 0 ? `(${selectedPhotos.length})` : ''
+							}`}
+						selectedText={`${selectedPhotos.length} fotos selecionadas`}
+						allowMultiple={true}
+						aspect={[9, 16]}
+						resizeWidth={900}
+						onImageSelect={handlePhotoSelect}
+						buttonStyle={{
+							backgroundColor: '#007AFF',
+							width: '100%',
+						}}
+					/>
+				</FormFieldsContainer>
 			</C.Form>
-
 			<C.ButtonArea>
 				<Button
 					onPress={() => navigation.goBack()}
@@ -235,3 +304,4 @@ export default function Piscina() {
 		</C.Container>
 	);
 }
+

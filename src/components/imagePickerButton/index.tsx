@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { Alert, StyleSheet, Text, TouchableOpacity } from 'react-native';
 
 interface ImagePickerButtonProps {
-  onImageSelect?: (uri: string) => void;
+  onImageSelect?: (file: { uri: string; name: string; type: string }) => void;
   buttonStyle?: object;
   textStyle?: object;
   selectText?: string;
@@ -28,7 +28,6 @@ export const ImagePickerButton: React.FC<ImagePickerButtonProps> = ({
 
   const handleSelectImage = async () => {
     try {
-      // Solicita permissão para acessar a galeria
       const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
       
       if (status !== ImagePicker.PermissionStatus.GRANTED) {
@@ -36,7 +35,6 @@ export const ImagePickerButton: React.FC<ImagePickerButtonProps> = ({
           'É necessário conceder permissão para acessar seu álbum!');
       }
 
-      // Abre a galeria para seleção
       const response = await ImagePicker.launchImageLibraryAsync({
         mediaTypes: ImagePicker.MediaTypeOptions.Images,
         allowsMultipleSelection: allowMultiple,
@@ -44,24 +42,29 @@ export const ImagePickerButton: React.FC<ImagePickerButtonProps> = ({
         quality: 1,
       });
 
-      if (response.canceled) {
-        return;
-      }
+      if (response.canceled) return;
 
-      // Manipula a imagem selecionada
       if (response.assets && response.assets.length > 0) {
+        const asset = response.assets[0];
+
         const imgManipulated = await ImageManipulator.manipulateAsync(
-          response.assets[0].uri,
+          asset.uri,
           [{ resize: { width: resizeWidth } }],
           {
             compress: 1,
             format: ImageManipulator.SaveFormat.JPEG,
-            base64: true,
+            base64: false,
           }
         );
 
+        const file = {
+          uri: imgManipulated.uri,
+          name: `image_${Date.now()}.jpg`,
+          type: 'image/jpeg',
+        };
+
         setSelectedImageUri(imgManipulated.uri);
-        onImageSelect?.(imgManipulated.uri);
+        onImageSelect?.(file);
       }
     } catch (error) {
       console.error('Erro ao selecionar imagem:', error);
