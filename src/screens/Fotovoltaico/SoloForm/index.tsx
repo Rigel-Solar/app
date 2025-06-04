@@ -101,7 +101,7 @@ const SoloForm = ({ control, errors }: SoloFormProps) => {
 			</FormFieldsContainer>
 
 			<FormFieldsContainer>
-				<Label>Condiciones do Solo</Label>
+                                <Label>Condições do Solo</Label>
 				<Controller
 					control={control}
 					name="condicaoSolo"
