@@ -124,12 +124,12 @@ const QuadroPrincipalForm = ({ control, errors }: QuadroPrincipalFormProps) => {
 			</FormFieldsContainer>
 
 			<FormFieldsContainer>
-				<Label>
-					Bitola do Condutor de Entrada no Quadro (Antes do Disjuntor Geral)
-				</Label>
-				<Controller
-					control={control}
-					name="bitolaCondutorEntradaQuadro"
+                                <Label>
+                                        Bitola do Condutor de Entrada no Quadro (Antes do Disjuntor Geral)
+                                </Label>
+                                <Controller
+                                        control={control}
+                                        name="antesDisjuntorPe"
 					render={({ field: { onChange, value } }) => (
 						<Input.Root>
 							<Input.Input
@@ -137,19 +137,19 @@ const QuadroPrincipalForm = ({ control, errors }: QuadroPrincipalFormProps) => {
 								placeholderText="ex.: 10mm²"
 								onChange={onChange}
 							/>
-							<Input.ErrorText
-								ErrorText={errors.bitolaCondutorEntradaQuadro?.message}
-							/>
+                                                        <Input.ErrorText
+                                                                ErrorText={errors.antesDisjuntorPe?.message}
+                                                        />
 						</Input.Root>
 					)}
 				/>
 			</FormFieldsContainer>
 
 			<FormFieldsContainer>
-				<Label>Aterramento</Label>
-				<Controller
-					control={control}
-					name="aterramentoQpe"
+                                <Label>Aterramento</Label>
+                                <Controller
+                                        control={control}
+                                        name="aterramentoPe"
 					render={({ field: { onChange, value } }) => (
 						<Input.Root>
 							<Input.Input
@@ -157,10 +157,10 @@ const QuadroPrincipalForm = ({ control, errors }: QuadroPrincipalFormProps) => {
 								placeholderText="ex.: Sim, Não"
 								onChange={onChange}
 							/>
-							<Input.ErrorText ErrorText={errors.aterramentoQpe?.message} />
-						</Input.Root>
-					)}
-				/>
+                                                        <Input.ErrorText ErrorText={errors.aterramentoPe?.message} />
+                                                </Input.Root>
+                                        )}
+                                />
 			</FormFieldsContainer>
 		</View>
 	);
