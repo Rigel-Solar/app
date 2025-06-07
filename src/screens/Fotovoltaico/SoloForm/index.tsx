@@ -83,76 +83,84 @@ const SoloForm = ({ control, errors }: SoloFormProps) => {
 	return (
 		<View>
 			<FormFieldsContainer>
-				<Label>Tipo de Solo</Label>
-				<Controller
-					control={control}
-					name="tipoSolo"
-					render={({ field: { onChange, value } }) => (
-						<Input.Root>
-							<Input.Input
-								value={value || ""}
-								placeholderText="ex.: Areia, Argila"
-								onChange={onChange}
-							/>
-							<Input.ErrorText ErrorText={errors.tipoSolo?.message} />
-						</Input.Root>
-					)}
-				/>
-			</FormFieldsContainer>
+                                <Label>Largura do Solo (m)</Label>
+                                <Controller
+                                        control={control}
+                                        name="larguraSolo"
+                                        render={({ field: { onChange, value } }) => (
+                                                <Input.Root>
+                                                        <Input.Input
+                                                                value={value?.toString() || ""}
+                                                                placeholderText="ex.: 1.5"
+                                                                onChange={(text) => {
+                                                                        const num = parseFloat(text);
+                                                                        onChange(isNaN(num) ? text : num);
+                                                                }}
+                                                                keyboardType="numeric"
+                                                        />
+                                                        <Input.ErrorText ErrorText={errors.larguraSolo?.message} />
+                                                </Input.Root>
+                                        )}
+                                />
+                        </FormFieldsContainer>
 
-			<FormFieldsContainer>
-				<Label>Condiciones do Solo</Label>
-				<Controller
-					control={control}
-					name="condicaoSolo"
-					render={({ field: { onChange, value } }) => (
-						<Input.Root>
-							<Input.Input
-								value={value || ""}
-								placeholderText="ex.: Bom, Regular, Ruim"
-								onChange={onChange}
-							/>
-							<Input.ErrorText ErrorText={errors.condicaoSolo?.message} />
-						</Input.Root>
-					)}
-				/>
-			</FormFieldsContainer>
+                        <FormFieldsContainer>
+                                <Label>Comprimento do Solo (m)</Label>
+                                <Controller
+                                        control={control}
+                                        name="comprimentoSolo"
+                                        render={({ field: { onChange, value } }) => (
+                                                <Input.Root>
+                                                        <Input.Input
+                                                                value={value?.toString() || ""}
+                                                                placeholderText="ex.: 5.0"
+                                                                onChange={(text) => {
+                                                                        const num = parseFloat(text);
+                                                                        onChange(isNaN(num) ? text : num);
+                                                                }}
+                                                                keyboardType="numeric"
+                                                        />
+                                                        <Input.ErrorText ErrorText={errors.comprimentoSolo?.message} />
+                                                </Input.Root>
+                                        )}
+                                />
+                        </FormFieldsContainer>
 
-			<FormFieldsContainer>
-				<Label>Presença de Rocha</Label>
-				<Controller
-					control={control}
-					name="presencaRocha"
-					render={({ field: { onChange, value } }) => (
-						<Input.Root>
-							<Input.Input
-								value={value || ""}
-								placeholderText="ex.: Sim, Não"
-								onChange={onChange}
-							/>
-							<Input.ErrorText ErrorText={errors.presencaRocha?.message} />
-						</Input.Root>
-					)}
-				/>
-			</FormFieldsContainer>
+                        <FormFieldsContainer>
+                                <Label>Nivelamento do Solo</Label>
+                                <Controller
+                                        control={control}
+                                        name="nivelamentoSoloDTO.nivelamento"
+                                        render={({ field: { onChange, value } }) => (
+                                                <Input.Root>
+                                                        <Input.Input
+                                                                value={value || ""}
+                                                                placeholderText="ex.: Plano, Irregular"
+                                                                onChange={onChange}
+                                                        />
+                                                        <Input.ErrorText ErrorText={errors.nivelamentoSoloDTO?.nivelamento?.message} />
+                                                </Input.Root>
+                                        )}
+                                />
+                        </FormFieldsContainer>
 
-			<FormFieldsContainer>
-				<Label>Profundidade do Solo</Label>
-				<Controller
-					control={control}
-					name="profundidadeSolo"
-					render={({ field: { onChange, value } }) => (
-						<Input.Root>
-							<Input.Input
-								value={value || ""}
-								placeholderText="ex.: 1.5m"
-								onChange={onChange}
-							/>
-							<Input.ErrorText ErrorText={errors.profundidadeSolo?.message} />
-						</Input.Root>
-					)}
-				/>
-			</FormFieldsContainer>
+                        <FormFieldsContainer>
+                                <Label>Tipo de Superfície</Label>
+                                <Controller
+                                        control={control}
+                                        name="tipoSuperficieDTO.tipo"
+                                        render={({ field: { onChange, value } }) => (
+                                                <Input.Root>
+                                                        <Input.Input
+                                                                value={value || ""}
+                                                                placeholderText="ex.: Terra, Concreto"
+                                                                onChange={onChange}
+                                                        />
+                                                        <Input.ErrorText ErrorText={errors.tipoSuperficieDTO?.tipo?.message} />
+                                                </Input.Root>
+                                        )}
+                                />
+                        </FormFieldsContainer>
 		</View>
 	);
 };

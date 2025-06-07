@@ -124,43 +124,56 @@ const QuadroPrincipalForm = ({ control, errors }: QuadroPrincipalFormProps) => {
 			</FormFieldsContainer>
 
 			<FormFieldsContainer>
-				<Label>
-					Bitola do Condutor de Entrada no Quadro (Antes do Disjuntor Geral)
-				</Label>
-				<Controller
-					control={control}
-					name="bitolaCondutorEntradaQuadro"
-					render={({ field: { onChange, value } }) => (
-						<Input.Root>
-							<Input.Input
-								value={value || ""}
-								placeholderText="ex.: 10mm²"
-								onChange={onChange}
-							/>
-							<Input.ErrorText
-								ErrorText={errors.bitolaCondutorEntradaQuadro?.message}
-							/>
-						</Input.Root>
-					)}
-				/>
+                                <Label>
+                                        Bitola do Condutor de Entrada no Quadro (Antes do Disjuntor Geral)
+                                </Label>
+                                <Controller
+                                        control={control}
+                                        name="antesDisjuntorPe"
+                                        render={({ field: { onChange, value } }) => (
+                                                <Input.Root>
+                                                        <Input.Input
+                                                                value={value?.toString() || ""}
+                                                                placeholderText="ex.: 10"
+                                                                onChange={(text) => {
+                                                                        const num = parseFloat(text);
+                                                                        onChange(isNaN(num) ? text : num);
+                                                                }}
+                                                                keyboardType="numeric"
+                                                        />
+                                                        <Input.ErrorText
+                                                                ErrorText={errors.antesDisjuntorPe?.message}
+                                                        />
+                                                </Input.Root>
+                                        )}
+                                />
 			</FormFieldsContainer>
 
 			<FormFieldsContainer>
-				<Label>Aterramento</Label>
-				<Controller
-					control={control}
-					name="aterramentoQpe"
-					render={({ field: { onChange, value } }) => (
-						<Input.Root>
-							<Input.Input
-								value={value || ""}
-								placeholderText="ex.: Sim, Não"
-								onChange={onChange}
-							/>
-							<Input.ErrorText ErrorText={errors.aterramentoQpe?.message} />
-						</Input.Root>
-					)}
-				/>
+                                <Label>Aterramento</Label>
+                                <Controller
+                                        control={control}
+                                        name="aterramentoPe"
+                                        render={({ field: { onChange, value } }) => (
+                                                <Input.Root>
+                                                        <Input.Input
+                                                                value={value === undefined ? "" : value ? "Sim" : "Não"}
+                                                                placeholderText="ex.: Sim, Não"
+                                                                onChange={(text) => {
+                                                                        const val = text.toLowerCase();
+                                                                        if (["sim", "s", "true", "1"].includes(val)) {
+                                                                                onChange(true);
+                                                                        } else if (["nao", "não", "n", "false", "0"].includes(val)) {
+                                                                                onChange(false);
+                                                                        } else {
+                                                                                onChange(text);
+                                                                        }
+                                                                }}
+                                                        />
+                                                        <Input.ErrorText ErrorText={errors.aterramentoPe?.message} />
+                                                </Input.Root>
+                                        )}
+                                />
 			</FormFieldsContainer>
 		</View>
 	);

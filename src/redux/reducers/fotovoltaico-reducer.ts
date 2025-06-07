@@ -10,7 +10,7 @@ export type CondicaoDTO = BaseDTO & { condicao?: string };
 export type IdadeTelhadoDTO = BaseDTO & { idade?: number };
 export type NivelamentoSoloDTO = BaseDTO & { nivelamento?: string };
 export type LocalInstalacaoModuloDTO = BaseDTO & { local?: string };
-export type MaterialVigasTelhadoDTO = BaseDTO & { material?: string };
+export type MaterialVigasTelhadoDTO = BaseDTO & { condicao?: string };
 export type ModeloRelogioDTO = BaseDTO & { modelo?: string };
 export type TelhadoAcessoDTO = BaseDTO & { acesso?: string };
 export type TensaoNominalDTO = BaseDTO & { tensao?: string };
@@ -68,7 +68,7 @@ export type FotovoltaicoTS = {
 	nivelamentoSoloDTO?: NivelamentoSoloDTO;
 	telhadoAcessoDTO?: TelhadoAcessoDTO;
 	tensaoNominalDTO?: TensaoNominalDTO;
-	tipoidClienteNavigation?: TipoDTO;
+        tipoClienteDTO?: TipoDTO;
 	tipoLigacaoDTO?: TipoDTO;
 	tipoSuperficieDTO?: TipoDTO;
 };
@@ -104,7 +104,7 @@ export const fotovoltaicoSlice = createSlice({
 			if (payload.bitolaCondutorPe !== undefined) state.bitolaCondutorPe = payload.bitolaCondutorPe;
 			
 			// DTOs
-			if (payload.tipoidClienteNavigation) state.tipoidClienteNavigation = safeAssign(state.tipoidClienteNavigation, payload.tipoidClienteNavigation);
+                        if (payload.tipoClienteDTO) state.tipoClienteDTO = safeAssign(state.tipoClienteDTO, payload.tipoClienteDTO);
 			if (payload.tipoLigacaoDTO) state.tipoLigacaoDTO = safeAssign(state.tipoLigacaoDTO, payload.tipoLigacaoDTO);
 			if (payload.tensaoNominalDTO) state.tensaoNominalDTO = safeAssign(state.tensaoNominalDTO, payload.tensaoNominalDTO);
 			if (payload.condicaoPadraoEntradaDTO) state.condicaoPadraoEntradaDTO = safeAssign(state.condicaoPadraoEntradaDTO, payload.condicaoPadraoEntradaDTO);
@@ -114,11 +114,11 @@ export const fotovoltaicoSlice = createSlice({
 		updateQuadroPrincipal: (state, action: PayloadAction<Partial<FotovoltaicoTS>>) => {
 			const { payload } = action;
 			
-			if (payload.disjuntorQuadroPrincipalQpe !== undefined) state.disjuntorQuadroPrincipalQpe = payload.disjuntorQuadroPrincipalQpe;
-			if (payload.bitolaCondutorPe !== undefined) state.bitolaCondutorPe = payload.bitolaCondutorPe;
-			if (payload.aterramentoPe !== undefined) state.aterramentoPe = payload.aterramentoPe;
-			if (payload.condicaoQuadroPrincipalDTO) state.condicaoQuadroPrincipalDTO = safeAssign(state.condicaoQuadroPrincipalDTO, payload.condicaoQuadroPrincipalDTO);
-		},
+                        if (payload.disjuntorQuadroPrincipalQpe !== undefined) state.disjuntorQuadroPrincipalQpe = payload.disjuntorQuadroPrincipalQpe;
+                        if (payload.antesDisjuntorPe !== undefined) state.antesDisjuntorPe = payload.antesDisjuntorPe;
+                        if (payload.aterramentoPe !== undefined) state.aterramentoPe = payload.aterramentoPe;
+                        if (payload.condicaoQuadroPrincipalDTO) state.condicaoQuadroPrincipalDTO = safeAssign(state.condicaoQuadroPrincipalDTO, payload.condicaoQuadroPrincipalDTO);
+                },
 		
 		updateLocalInstalacao: (state, action: PayloadAction<Partial<FotovoltaicoTS>>) => {
 			const { payload } = action;
