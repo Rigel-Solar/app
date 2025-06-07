@@ -31,13 +31,13 @@ const PadraoEntradaFormScreen = () => {
 	const dispatch = useAppDispatch();
 	const navigation =
 		useNavigation<NativeStackNavigationProp<RootStackParams>>();
-	const {
-		control,
-		handleSubmit,
-		formState: errors,
-	} = useForm<FotovoltaicoTS>({
-		resolver: yupResolver(fotovoltaicoSchema),
-	});
+       const {
+               control,
+               handleSubmit,
+               formState: { errors },
+       } = useForm<FotovoltaicoTS>({
+               resolver: yupResolver(fotovoltaicoSchema),
+       });
 
 	const onSubmit = (formData: FotovoltaicoTS) => {
 		console.log("Aqui 2: ", formData)
@@ -128,17 +128,21 @@ const PadraoEntradaForm = ({ control, errors }: PadraoEntradaFormProps) => {
                                 <Controller
                                         control={control}
                                         name="demandaContratadaPe"
-					render={({ field: { onChange, value } }) => (
-						<Input.Root>
-							<Input.Input
-								value={value || ""}
-								placeholderText="ex.: 100kW"
-								onChange={onChange}
-							/>
+                                        render={({ field: { onChange, value } }) => (
+                                                <Input.Root>
+                                                        <Input.Input
+                                                                value={value?.toString() || ""}
+                                                                placeholderText="ex.: 100"
+                                                                onChange={(text) => {
+                                                                        const num = parseFloat(text);
+                                                                        onChange(isNaN(num) ? text : num);
+                                                                }}
+                                                                keyboardType="numeric"
+                                                        />
                                                         <Input.ErrorText ErrorText={errors.demandaContratadaPe?.message} />
-						</Input.Root>
-					)}
-				/>
+                                                </Input.Root>
+                                        )}
+                                />
 			</FormFieldsContainer>
 
 			<FormFieldsContainer>

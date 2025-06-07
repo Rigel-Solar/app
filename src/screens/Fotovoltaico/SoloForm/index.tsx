@@ -29,13 +29,13 @@ const SoloFormScreen = () => {
 	const dispatch = useAppDispatch();
 	const navigation =
 		useNavigation<NativeStackNavigationProp<RootStackParams>>();
-	const {
-		control,
-		handleSubmit,
-		formState: errors,
-	} = useForm<FotovoltaicoTS>({
-		resolver: yupResolver(fotovoltaicoSchema),
-	});
+       const {
+               control,
+               handleSubmit,
+               formState: { errors },
+       } = useForm<FotovoltaicoTS>({
+               resolver: yupResolver(fotovoltaicoSchema),
+       });
 
 	const onSubmit = (formData: FotovoltaicoTS) => {
 		dispatch(updateSolo(formData));
@@ -92,7 +92,10 @@ const SoloForm = ({ control, errors }: SoloFormProps) => {
                                                         <Input.Input
                                                                 value={value?.toString() || ""}
                                                                 placeholderText="ex.: 1.5"
-                                                                onChange={onChange}
+                                                                onChange={(text) => {
+                                                                        const num = parseFloat(text);
+                                                                        onChange(isNaN(num) ? text : num);
+                                                                }}
                                                                 keyboardType="numeric"
                                                         />
                                                         <Input.ErrorText ErrorText={errors.larguraSolo?.message} />
@@ -100,7 +103,6 @@ const SoloForm = ({ control, errors }: SoloFormProps) => {
                                         )}
                                 />
                         </FormFieldsContainer>
-
 			<FormFieldsContainer>
                                 <Label>Condições do Solo</Label>
 				<Controller
@@ -128,7 +130,10 @@ const SoloForm = ({ control, errors }: SoloFormProps) => {
                                                         <Input.Input
                                                                 value={value?.toString() || ""}
                                                                 placeholderText="ex.: 5.0"
-                                                                onChange={onChange}
+                                                                onChange={(text) => {
+                                                                        const num = parseFloat(text);
+                                                                        onChange(isNaN(num) ? text : num);
+                                                                }}
                                                                 keyboardType="numeric"
                                                         />
                                                         <Input.ErrorText ErrorText={errors.comprimentoSolo?.message} />
@@ -153,8 +158,6 @@ const SoloForm = ({ control, errors }: SoloFormProps) => {
                                         )}
                                 />
                         </FormFieldsContainer>
-
-                        <FormFieldsContainer>
                                 <Label>Tipo de Superfície</Label>
                                 <Controller
                                         control={control}

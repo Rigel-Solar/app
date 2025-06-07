@@ -114,11 +114,11 @@ export const fotovoltaicoSlice = createSlice({
 		updateQuadroPrincipal: (state, action: PayloadAction<Partial<FotovoltaicoTS>>) => {
 			const { payload } = action;
 			
-			if (payload.disjuntorQuadroPrincipalQpe !== undefined) state.disjuntorQuadroPrincipalQpe = payload.disjuntorQuadroPrincipalQpe;
-			if (payload.bitolaCondutorPe !== undefined) state.bitolaCondutorPe = payload.bitolaCondutorPe;
-			if (payload.aterramentoPe !== undefined) state.aterramentoPe = payload.aterramentoPe;
-			if (payload.condicaoQuadroPrincipalDTO) state.condicaoQuadroPrincipalDTO = safeAssign(state.condicaoQuadroPrincipalDTO, payload.condicaoQuadroPrincipalDTO);
-		},
+                        if (payload.disjuntorQuadroPrincipalQpe !== undefined) state.disjuntorQuadroPrincipalQpe = payload.disjuntorQuadroPrincipalQpe;
+                        if (payload.antesDisjuntorPe !== undefined) state.antesDisjuntorPe = payload.antesDisjuntorPe;
+                        if (payload.aterramentoPe !== undefined) state.aterramentoPe = payload.aterramentoPe;
+                        if (payload.condicaoQuadroPrincipalDTO) state.condicaoQuadroPrincipalDTO = safeAssign(state.condicaoQuadroPrincipalDTO, payload.condicaoQuadroPrincipalDTO);
+                },
 		
 		updateLocalInstalacao: (state, action: PayloadAction<Partial<FotovoltaicoTS>>) => {
 			const { payload } = action;

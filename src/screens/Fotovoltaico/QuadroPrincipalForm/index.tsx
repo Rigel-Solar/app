@@ -29,13 +29,13 @@ const QuadroPrincipalFormScreen = () => {
 	const dispatch = useAppDispatch();
 	const navigation =
 		useNavigation<NativeStackNavigationProp<RootStackParams>>();
-	const {
-		control,
-		handleSubmit,
-		formState: errors,
-	} = useForm<FotovoltaicoTS>({
-		resolver: yupResolver(fotovoltaicoSchema),
-	});
+       const {
+               control,
+               handleSubmit,
+               formState: { errors },
+       } = useForm<FotovoltaicoTS>({
+               resolver: yupResolver(fotovoltaicoSchema),
+       });
 
 	const onSubmit = (formData: FotovoltaicoTS) => {
 		console.log("Aqui 2: ", formData);
@@ -130,19 +130,23 @@ const QuadroPrincipalForm = ({ control, errors }: QuadroPrincipalFormProps) => {
                                 <Controller
                                         control={control}
                                         name="antesDisjuntorPe"
-					render={({ field: { onChange, value } }) => (
-						<Input.Root>
-							<Input.Input
-								value={value || ""}
-								placeholderText="ex.: 10mm²"
-								onChange={onChange}
-							/>
+                                        render={({ field: { onChange, value } }) => (
+                                                <Input.Root>
+                                                        <Input.Input
+                                                                value={value?.toString() || ""}
+                                                                placeholderText="ex.: 10"
+                                                                onChange={(text) => {
+                                                                        const num = parseFloat(text);
+                                                                        onChange(isNaN(num) ? text : num);
+                                                                }}
+                                                                keyboardType="numeric"
+                                                        />
                                                         <Input.ErrorText
                                                                 ErrorText={errors.antesDisjuntorPe?.message}
                                                         />
-						</Input.Root>
-					)}
-				/>
+                                                </Input.Root>
+                                        )}
+                                />
 			</FormFieldsContainer>
 
 			<FormFieldsContainer>
@@ -150,13 +154,22 @@ const QuadroPrincipalForm = ({ control, errors }: QuadroPrincipalFormProps) => {
                                 <Controller
                                         control={control}
                                         name="aterramentoPe"
-					render={({ field: { onChange, value } }) => (
-						<Input.Root>
-							<Input.Input
-								value={value || ""}
-								placeholderText="ex.: Sim, Não"
-								onChange={onChange}
-							/>
+                                        render={({ field: { onChange, value } }) => (
+                                                <Input.Root>
+                                                        <Input.Input
+                                                                value={value === undefined ? "" : value ? "Sim" : "Não"}
+                                                                placeholderText="ex.: Sim, Não"
+                                                                onChange={(text) => {
+                                                                        const val = text.toLowerCase();
+                                                                        if (["sim", "s", "true", "1"].includes(val)) {
+                                                                                onChange(true);
+                                                                        } else if (["nao", "não", "n", "false", "0"].includes(val)) {
+                                                                                onChange(false);
+                                                                        } else {
+                                                                                onChange(text);
+                                                                        }
+                                                                }}
+                                                        />
                                                         <Input.ErrorText ErrorText={errors.aterramentoPe?.message} />
                                                 </Input.Root>
                                         )}
