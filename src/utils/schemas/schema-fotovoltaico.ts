@@ -23,7 +23,7 @@ const localInstalacaoModuloDTOSchema = baseDTOSchema.shape({
 });
 
 const materialVigasTelhadoDTOSchema = baseDTOSchema.shape({
-  condicao: yup.string().optional(), // ✅ Correção aqui
+  material: yup.string().optional(),
 });
 
 const modeloRelogioDTOSchema = baseDTOSchema.shape({
