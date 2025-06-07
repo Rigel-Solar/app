@@ -98,11 +98,11 @@ const TelhadoFormScreen = () => {
 	const onSubmit = (formData: FotovoltaicoTS) => {
 		console.log("Dados originais do formulário:", formData);
 		
-		try {
-			const transformedData = transformFormData(formData);
-			console.log("Dados transformados para envio:", fotovoltaico);
-			
-			onCreate(fotovoltaico, {
+                try {
+                        const transformedData = transformFormData(formData);
+                        console.log("Dados transformados para envio:", transformedData);
+
+                        onCreate(transformedData, {
 				onSuccess: (response) => {
 					console.log("Sucesso na criação:", response);
 					Alert.alert("Relatório criado!");
