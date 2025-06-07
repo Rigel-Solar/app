@@ -31,13 +31,13 @@ const PadraoEntradaFormScreen = () => {
 	const dispatch = useAppDispatch();
 	const navigation =
 		useNavigation<NativeStackNavigationProp<RootStackParams>>();
-	const {
-		control,
-		handleSubmit,
-		formState: errors,
-	} = useForm<FotovoltaicoTS>({
-		resolver: yupResolver(fotovoltaicoSchema),
-	});
+       const {
+               control,
+               handleSubmit,
+               formState: { errors },
+       } = useForm<FotovoltaicoTS>({
+               resolver: yupResolver(fotovoltaicoSchema),
+       });
 
 	const onSubmit = (formData: FotovoltaicoTS) => {
 		console.log("Aqui 2: ", formData)
