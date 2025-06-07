@@ -124,10 +124,10 @@ const InstalacaoModuloForm = ({
 			</FormFieldsContainer>
 
 			<FormFieldsContainer>
-				<Label>Material das Vigas do Telhado</Label>
-				<Controller
-					control={control}
-					name="materialVigasTelhadoDTO.material"
+                                <Label>Material das Vigas do Telhado</Label>
+                                <Controller
+                                        control={control}
+                                        name="materialVigasTelhadoDTO.condicao"
 					render={({ field: { onChange, value } }) => (
 						<Input.Root>
 							<Input.Input
@@ -135,9 +135,9 @@ const InstalacaoModuloForm = ({
 								placeholderText="ex.: Madeira, Metal"
 								onChange={onChange}
 							/>
-							<Input.ErrorText
-								ErrorText={errors.materialVigasTelhadoDTO?.message}
-							/>
+                                                        <Input.ErrorText
+                                                                ErrorText={errors.materialVigasTelhadoDTO?.condicao?.message}
+                                                        />
 						</Input.Root>
 					)}
 				/>

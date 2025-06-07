@@ -87,9 +87,9 @@ const PadraoEntradaForm = ({ control, errors }: PadraoEntradaFormProps) => {
 		<View>
 			<FormFieldsContainer>
 				<Label>Concessionária de Energia</Label>
-				<Controller
-					control={control}
-					name="concessionariaEnergia"
+                                <Controller
+                                        control={control}
+                                        name="concessionariaEnergiaPe"
 					render={({ field: { onChange, value } }) => (
 						<Input.Root>
 							<Input.Input
@@ -97,37 +97,37 @@ const PadraoEntradaForm = ({ control, errors }: PadraoEntradaFormProps) => {
 								placeholderText="ex.: ABC Electric"
 								onChange={onChange}
 							/>
-							<Input.ErrorText
-								ErrorText={errors.concessionariaEnergia?.message}
-							/>
+                                                        <Input.ErrorText
+                                                                ErrorText={errors.concessionariaEnergiaPe?.message}
+                                                        />
 						</Input.Root>
 					)}
 				/>
 			</FormFieldsContainer>
 
 			<FormFieldsContainer>
-				<Label>Tipo de Cliente</Label>
-				<Controller
-					control={control}
-					name="tipoidClienteNavigation"
-					render={({ field: { onChange, value } }) => (
-						<Input.Root>
-							<Input.Input
-								value={value || ""}
-								placeholderText="ex.: Residencial, Comercial"
-								onChange={(newValue) => onChange({ tipo: newValue })}
-							/>
-							<Input.ErrorText ErrorText={errors.tipoidClienteNavigation?.message} />
-						</Input.Root>
-					)}
-				/>
+                                <Label>Tipo de Cliente</Label>
+                                <Controller
+                                        control={control}
+                                        name="tipoClienteDTO.tipo"
+                                        render={({ field: { onChange, value } }) => (
+                                                <Input.Root>
+                                                        <Input.Input
+                                                                value={value || ""}
+                                                                placeholderText="ex.: Residencial, Comercial"
+                                                                onChange={onChange}
+                                                        />
+                                                        <Input.ErrorText ErrorText={errors.tipoClienteDTO?.tipo?.message} />
+                                                </Input.Root>
+                                        )}
+                                />
 			</FormFieldsContainer>
 
 			<FormFieldsContainer>
-				<Label>Demanda Contratada</Label>
-				<Controller
-					control={control}
-					name="demandaContratada"
+                                <Label>Demanda Contratada</Label>
+                                <Controller
+                                        control={control}
+                                        name="demandaContratadaPe"
 					render={({ field: { onChange, value } }) => (
 						<Input.Root>
 							<Input.Input
@@ -135,73 +135,73 @@ const PadraoEntradaForm = ({ control, errors }: PadraoEntradaFormProps) => {
 								placeholderText="ex.: 100kW"
 								onChange={onChange}
 							/>
-							<Input.ErrorText ErrorText={errors.demandaContratada?.message} />
+                                                        <Input.ErrorText ErrorText={errors.demandaContratadaPe?.message} />
 						</Input.Root>
 					)}
 				/>
 			</FormFieldsContainer>
 
 			<FormFieldsContainer>
-				<Label>Tipo de Ligação</Label>
-				<Controller
-					control={control}
-					name="tipoLigacaoDTO"
-					render={({ field: { onChange, value } }) => (
-						<Input.Root>
-							<Input.Input
-								value={value || ""}
-								placeholderText="ex.: Monofásica, Bifásica, Trifásica"
-								onChange={(newValue) => onChange({ tipo: newValue })}
-							/>
-							<Input.ErrorText ErrorText={errors.tipoLigacaoDTO?.message} />
-						</Input.Root>
-					)}
-				/>
+                                <Label>Tipo de Ligação</Label>
+                                <Controller
+                                        control={control}
+                                        name="tipoLigacaoDTO.tipo"
+                                        render={({ field: { onChange, value } }) => (
+                                                <Input.Root>
+                                                        <Input.Input
+                                                                value={value || ""}
+                                                                placeholderText="ex.: Monofásica, Bifásica, Trifásica"
+                                                                onChange={onChange}
+                                                        />
+                                                        <Input.ErrorText ErrorText={errors.tipoLigacaoDTO?.tipo?.message} />
+                                                </Input.Root>
+                                        )}
+                                />
 			</FormFieldsContainer>
 
 			<FormFieldsContainer>
-				<Label>Tensão Nominal</Label>
-				<Controller
-					control={control}
-					name="tensaoNominalDTO"
-					render={({ field: { onChange, value } }) => (
-						<Input.Root>
-							<Input.Input
-								value={value || ""}
-								placeholderText="ex.: 220V, 380V"
-								onChange={(newValue) => onChange({ tensao: newValue })}
-							/>
-							<Input.ErrorText ErrorText={errors.tensaoNominalDTO?.message} />
-						</Input.Root>
-					)}
-				/>
+                                <Label>Tensão Nominal</Label>
+                                <Controller
+                                        control={control}
+                                        name="tensaoNominalDTO.tensao"
+                                        render={({ field: { onChange, value } }) => (
+                                                <Input.Root>
+                                                        <Input.Input
+                                                                value={value || ""}
+                                                                placeholderText="ex.: 220V, 380V"
+                                                                onChange={onChange}
+                                                        />
+                                                        <Input.ErrorText ErrorText={errors.tensaoNominalDTO?.tensao?.message} />
+                                                </Input.Root>
+                                        )}
+                                />
 			</FormFieldsContainer>
 
 			<FormFieldsContainer>
-				<Label>Condição Padrão de Entrada</Label>
-				<Controller
-					control={control}
-					name="condicaoPadraoEntradaDTO"
-					render={({ field: { onChange, value } }) => (
-						<Input.Root>
-							<Input.Input
-								value={value || ""}
-								placeholderText="ex.: Bom, Regular, Ruim"
-								onChange={(newValue) => onChange({ condicao: newValue })}
-							/>
-							<Input.ErrorText
-								ErrorText={errors.condicaoPadraoEntradaDTO?.message}
-							/>
-						</Input.Root>
-					)}
-				/>
+                                <Label>Condição Padrão de Entrada</Label>
+                                <Controller
+                                        control={control}
+                                        name="condicaoPadraoEntradaDTO.condicao"
+                                        render={({ field: { onChange, value } }) => (
+                                                <Input.Root>
+                                                        <Input.Input
+                                                                value={value || ""}
+                                                                placeholderText="ex.: Bom, Regular, Ruim"
+                                                                onChange={onChange}
+                                                        />
+                                                        <Input.ErrorText
+                                                                ErrorText={errors.condicaoPadraoEntradaDTO?.condicao?.message}
+                                                        />
+                                                </Input.Root>
+                                        )}
+                                />
 			</FormFieldsContainer>
 
 			<FormFieldsContainer>
-				<Label>Dimensão da Caixa Padrão</Label>
-				<Controller
-					control={control}
-					name="dimensaoCaixaPadrao"
+                                <Label>Dimensão da Caixa Padrão</Label>
+                                <Controller
+                                        control={control}
+                                        name="dimensaoCaixaPadraoPe"
 					render={({ field: { onChange, value } }) => (
 						<Input.Root>
 							<Input.Input
@@ -209,30 +209,30 @@ const PadraoEntradaForm = ({ control, errors }: PadraoEntradaFormProps) => {
 								placeholderText="ex.: 60x40x20cm"
 								onChange={onChange}
 							/>
-							<Input.ErrorText
-								ErrorText={errors.dimensaoCaixaPadrao?.message}
-							/>
+                                                        <Input.ErrorText
+                                                                ErrorText={errors.dimensaoCaixaPadraoPe?.message}
+                                                        />
 						</Input.Root>
 					)}
 				/>
 			</FormFieldsContainer>
 
 			<FormFieldsContainer>
-				<Label>Modelo do Relógio</Label>
-				<Controller
-					control={control}
-					name="modeloRelogioDTO"
-					render={({ field: { onChange, value } }) => (
-						<Input.Root>
-							<Input.Input
-								value={value || ""}
-								placeholderText="ex.: ABC123"
-								onChange={(newValue) => onChange({ modelo: newValue })}
-							/>
-							<Input.ErrorText ErrorText={errors.modeloRelogioDTO?.message} />
-						</Input.Root>
-					)}
-				/>
+                                <Label>Modelo do Relógio</Label>
+                                <Controller
+                                        control={control}
+                                        name="modeloRelogioDTO.modelo"
+                                        render={({ field: { onChange, value } }) => (
+                                                <Input.Root>
+                                                        <Input.Input
+                                                                value={value || ""}
+                                                                placeholderText="ex.: ABC123"
+                                                                onChange={onChange}
+                                                        />
+                                                        <Input.ErrorText ErrorText={errors.modeloRelogioDTO?.modelo?.message} />
+                                                </Input.Root>
+                                        )}
+                                />
 			</FormFieldsContainer>
 		</View>
 	);
