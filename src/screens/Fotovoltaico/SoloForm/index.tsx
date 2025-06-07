@@ -103,7 +103,23 @@ const SoloForm = ({ control, errors }: SoloFormProps) => {
                                         )}
                                 />
                         </FormFieldsContainer>
-
+			<FormFieldsContainer>
+                                <Label>Condições do Solo</Label>
+				<Controller
+					control={control}
+					name="condicaoSolo"
+					render={({ field: { onChange, value } }) => (
+						<Input.Root>
+							<Input.Input
+								value={value || ""}
+								placeholderText="ex.: Bom, Regular, Ruim"
+								onChange={onChange}
+							/>
+							<Input.ErrorText ErrorText={errors.condicaoSolo?.message} />
+						</Input.Root>
+					)}
+				/>
+			</FormFieldsContainer>
                         <FormFieldsContainer>
                                 <Label>Comprimento do Solo (m)</Label>
                                 <Controller
@@ -125,7 +141,6 @@ const SoloForm = ({ control, errors }: SoloFormProps) => {
                                         )}
                                 />
                         </FormFieldsContainer>
-
                         <FormFieldsContainer>
                                 <Label>Nivelamento do Solo</Label>
                                 <Controller
@@ -143,8 +158,6 @@ const SoloForm = ({ control, errors }: SoloFormProps) => {
                                         )}
                                 />
                         </FormFieldsContainer>
-
-                        <FormFieldsContainer>
                                 <Label>Tipo de Superfície</Label>
                                 <Controller
                                         control={control}
