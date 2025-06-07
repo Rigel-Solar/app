@@ -158,6 +158,7 @@ const SoloForm = ({ control, errors }: SoloFormProps) => {
                                         )}
                                 />
                         </FormFieldsContainer>
+                        <FormFieldsContainer>
                                 <Label>Tipo de Superfície</Label>
                                 <Controller
                                         control={control}
