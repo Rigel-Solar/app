@@ -9,15 +9,15 @@ import {
 	fotovoltaicoSchema,
 	FotovoltaicoTS,
 } from "@/utils/schemas/schema-fotovoltaico";
+import { useMutationQuery } from "@/utils/services/hooks/useMutationQuery";
 import { Ionicons } from "@expo/vector-icons";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import React from "react";
 import { Controller, useForm } from "react-hook-form";
-import { Alert, ScrollView, View } from "react-native";
-import { ButtonArea, Label, Form } from "../styles";
-import { useMutationQuery } from "@/utils/services/hooks/useMutationQuery";
+import { Alert, View } from "react-native";
+import { ButtonArea, Form, Label } from "../styles";
 
 interface TelhadoFormProps {
 	control: any;
@@ -95,6 +95,50 @@ const TelhadoFormScreen = () => {
 		return transformed;
 	};
 
+const data = {
+  quantidadeSf: 0,
+  potenciaSf: 0,
+  dimensoesSf: 0,
+  areaOcupacaoSf: 0,
+  modeloInversorSf: "teste",
+  quantidadeInversorSf: 0,
+  concessionariaEnergiaPe: "teste",
+  demandaContratadaPe: 0,
+  dimensaoCaixaPadraoPe: "teste",
+  aterramentoPe: true,
+  disjuntorPadraoEntradaPe: "teste",
+  bitolaCondutorPe: 0,
+  antesDisjuntorPe: 0,
+  disjuntorQuadroPrincipalQpe: "teste",
+  dimensoesQpe: 0,
+  areaOcupacaoQpe: 0,
+  modeloInversorQpe: "teste",
+  quantidadeInversorQpe: 0,
+  larguraDcp: 0,
+  comprimentoDcp: 0,
+  profundidadeDcp: 0,
+  larguraSolo: 0,
+  comprimentoSolo: 0,
+  tipoTelha: "c",
+  distanciaRipasTelhado: 3,
+  distanciaCaibrosTelhado: 2,
+  distanciaTercasTelhado: 1,
+  distanciaEmpenaTelhado: 2,
+  condicaoPadraoEntradaDTO: { condicao: "a" },
+  condicaoQuadroPrincipalDTO: { condicao: "a" },
+  condicaoVigaDTO: { condicao: "a" },
+  idadeTelhadoDTO: { idade: 10 },
+  localInstalacaoModuloDTO: { local: "a" },
+  materialVigasTelhadoDTO: { condicao: "a" },
+  modeloRelogioDTO: { modelo: "a" },
+  nivelamentoSoloDTO: { nivelamento: "a" },
+  telhadoAcessoDTO: { acesso: "a" },
+  tensaoNominalDTO: { tensao: "a" },
+  tipoClienteDTO: { tipo: "a" },
+  tipoLigacaoDTO: { tipo: "a" },
+  tipoSuperficieDTO: { tipo: "a" }
+}
+
 	const onSubmit = (formData: FotovoltaicoTS) => {
 		console.log("Dados originais do formulário:", formData);
 		
@@ -102,11 +146,11 @@ const TelhadoFormScreen = () => {
                         const transformedData = transformFormData(formData);
                         console.log("Dados transformados para envio:", transformedData);
 
-                        onCreate(transformedData, {
+                        onCreate(data, {
 				onSuccess: (response) => {
 					console.log("Sucesso na criação:", response);
 					Alert.alert("Relatório criado!");
-					dispatch(updateTelhado(transformedData));
+					dispatch(updateTelhado(data));
 					navigation.goBack();
 				},
 				onError: (error) => {
